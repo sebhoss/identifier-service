@@ -1,0 +1,155 @@
+= Identifier-Service
+Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
+:github-org: sebhoss
+:project-name: identifier-service
+:project-group: com.github.sebhoss.identifier
+:toc:
+:toc-placement: preamble
+
+image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
+image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/{project-name}"]
+image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
+image:https://img.shields.io/gitter/room/{github-org}/{project-name}.svg?style=flat-square["join chat", link="https://gitter.im/{github-org}/{project-name}"]
+
+Service to generate more or less unique identifiers.
+
+== Features
+
+* Generate identifiers based on sequences, timestamps and UUIDs
+* Encode them using link:https://en.wikipedia.org/wiki/Base36[Base36], link:https://en.wikipedia.org/wiki/Base_62[Base62], link:https://en.wikipedia.org/wiki/Base64[Base64] or link:http://hashids.org/[HashId]
+* HTTP endpoints that produce both `text/html` as well as `text/plain`
+* Allow to retrieve multiple identifiers per call
+* link:https://www.slack.com/[Slack] endpoint for link:https://api.slack.com/slash-commands[slash commands]
+* link:https://www.polymer-project.org/[Polymer.js] based web component
+
+=== Demos
+
+|===
+| Host | Provider | Region | Branch | Sleepy?
+
+| https://id-sebhoss.rhcloud.com/
+| OpenShift
+| US/East
+| master
+| no
+
+| https://guarded-dawn-41655.herokuapp.com/
+| Heroku
+| US
+| master
+| yes
+
+| https://identifier-service.azurewebsites.net/
+| Azure
+| Europe/West
+| master
+| yes
+|===
+
+== Development Status
+
+All main features are implemented, tests and documentation are incomplete for an first official release.
+
+* Tickets for link:https://github.com/sebhoss/identifier-service/milestones/1.0.0[release 1.0.0]
+
+== Usage
+
+=== `GET` requests for `text/html` and `text/plain`
+
+Send a HTTP GET request against any of the following endpoints using either `text/html` or `text/plain` as the `ACCEPT` header. Use the `quantity` parameter to specify how many identifiers should be returned (defaults to 1).
+
+|===
+| Encoding | Sequence | Timestamp | UUID
+
+| Plain
+| /sequences/sequence
+| /timestamps/timestamp
+| /uuids/uuid
+
+| Base36
+| /sequences/base36
+| /timestamps/base36
+| /uuids/base36
+
+| Base62
+| /sequences/base62
+| /timestamps/base62
+| /uuids/base62
+
+| Base64
+| /sequences/base64
+| /timestamps/base64
+| /uuids/base64
+
+| HashId
+| /sequences/hashid
+| /timestamps/hashid
+| /uuids/hashid
+|===
+
+=== `POST` requests for Slack link:https://api.slack.com/slash-commands[slash commands]
+
+Send a HTTP POST request against `/slack` with any of the following command names. The command value specifies how many identifiers will be returned.
+
+|===
+| Encoding | Sequence | Timestamp | UUID
+
+| Plain
+| /sequence
+| /timestamp
+| /uuid
+
+| Base36
+| /sequence-in-base36
+| /timestamp-in-base36
+| /uuid-in-base36
+
+| Base62
+| /sequence-in-base62
+| /timestamp-in-base62
+| /uuid-in-base62
+
+| Base64
+| /sequence-in-base64
+| /timestamp-in-base64
+| /uuid-in-base64
+
+| HashId
+| /sequence-as-hashid
+| /timestamp-as-hashid
+| /uuid-as-hashid
+|===
+
+=== Compatibility
+
+This project is compatible with the following Java versions:
+
+.Java compatibility
+|===
+| | 1.X.Y
+
+| Java 8
+| ✓
+|===
+
+== Alternatives
+
+This is a non-exhaustive list of alternatives that provide the same or similar feature set:
+
+* https://www.famkruithof.net/uuid/uuidgen
+* https://www.guidgenerator.com/
+* https://uuidgenerator.org/
+* http://www.guidgen.com/
+* http://www.onlineuuidgenerator.com/
+* http://www.passwordrandom.com/guid-generator
+* http://uuid.cz/
+* http://new-guid.com/
+
+== License
+
+To the extent possible under law, the author(s) have dedicated all copyright
+and related and neighboring rights to this software to the public domain
+worldwide. This software is distributed without any warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication along
+with this software. If not, see http://creativecommons.org/publicdomain/zero/1.0/.

@@ -1,0 +1,28 @@
+#
+# This file is part of identifier-service. It is subject to the license terms in the LICENSE file found in the top-level
+# directory of this distribution and at http://creativecommons.org/publicdomain/zero/1.0/. No part of identifier-service,
+# including this file, may be copied, modified, propagated, or distributed except according to the terms contained
+# in the LICENSE file.
+#
+
+application:
+  url: http://localhost:8080
+
+
+###############################################################################
+#
+# Spring configuration
+#
+spring:
+  thymeleaf:
+    cache: false
+  jmx:
+    enabled: false
+  devtools:
+    restart:
+      enabled: false
+
+server:
+  compression:
+    enabled: true # If response compression is enabled.
+  display-name: id-service # Display name of the application.

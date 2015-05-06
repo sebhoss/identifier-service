@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export JAVA_HOME=${OPENSHIFT_DATA_DIR}jdk1.8.0_74
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+
+cd $OPENSHIFT_REPO_DIR
+nohup java -Dapplication.url=https://id-sebhoss.rhcloud.com -jar identifier-http-service/target/*.jar --server.port=${OPENSHIFT_DIY_PORT} --server.address=${OPENSHIFT_DIY_IP} &

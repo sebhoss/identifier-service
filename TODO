@@ -1,0 +1,16 @@
+python client:
+ - https://www.urbanairship.com/blog/building-python-packages-with-maven
+ - https://github.com/urbanairship/mvn-python-packaging/blob/master/pom.xml
+
+hubot script to fetch IDs
+
+Mattermost API
+ * http://docs.mattermost.com/developer/webhooks-outgoing.html
+ * https://github.com/mattermost/mattermost-integration-giphy
+
+OpenShift marketplace
+ * https://marketplace.openshift.com/home
+
+documentation:
+ - curl bugs:
+   * https://curl.haxx.se/docs/todo.html#Support_IDNA2008

@@ -1,0 +1,103 @@
+<dom-module id="id-value">
+
+    <template>
+        <style>
+            .identifier-container {}
+            .identifier-block {}
+            .refresh {}
+        </style>
+        <div class="identifier-container">
+            <div class="identifier-block">
+                <pre id="id" on-click="copyToClipboard"><strong>[[value]]</strong></pre>
+                <span class="refresh" on-click="refresh">
+                    <img src="/images/refresh.svg" width="20px" height="20px"></img>
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        "use strict";
+
+        var clipboard = (function() {
+            var _dataString = null;
+
+            document.addEventListener("copy", function(e) {
+                if (_dataString !== null) {
+                    try {
+                        e.clipboardData.setData("text/plain", _dataString);
+                        e.preventDefault();
+                    } finally {
+                        _dataString = null;
+                    }
+                }
+            });
+
+            return function(data) {
+                _dataString = data;
+                document.execCommand("copy");
+            };
+        })();
+
+        HTMLImports.whenReady(function () {
+
+            Polymer({
+                is: 'id-value',
+
+                properties: {
+                    path: String,
+                    value: String
+                },
+
+                attached: function() {
+                    if (!this.value && this.path) {
+                        this.refresh();
+                    }
+                },
+
+                copyToClipboard: function() {
+                    let value = this.$.id.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                    let alert = document.querySelector('#alert-container');
+                    let notice1 = '<div class="alert-box notice">';
+                    let notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
+                    let notice3 = '</div>';
+                    let notice = notice1 + notice2 + '<span>' + this.value + '</span>' + notice3;
+                    let tmp = document.createElement('div');
+                    tmp.innerHTML = notice;
+
+                    clipboard(this.$.id.textContent);
+                    alert.appendChild(tmp);
+                    this.$.id.classList.add('copied');
+
+                    setTimeout(function() {
+                        alert.removeChild(tmp);
+                    }, (1000));
+                },
+
+                refresh: function() {
+                    let httpRequest = new XMLHttpRequest();
+
+                    if (!httpRequest) {
+                        return false;
+                    }
+
+                    httpRequest.addEventListener('readystatechange', function () {
+                        if (httpRequest.readyState == XMLHttpRequest.DONE ) {
+                            if (httpRequest.status == 200) {
+                                this.value = httpRequest.responseText;
+                                this.$.id.classList.remove('copied');
+                            }
+                         }
+                      }.bind(this));
+
+                    httpRequest.open("GET", this.path, true);
+                    httpRequest.setRequestHeader('Accept', 'text/plain');
+                    httpRequest.send();
+                }
+
+              });
+
+        });
+    </script>
+
+</dom-module>

@@ -1,0 +1,93 @@
+<dom-module id="id-multiplier">
+
+    <template>
+        <span class="minus">
+            <span class="octicon octicon-dash" on-click="decrement"></span>
+        </span>
+        <input type="number"
+               min="1" 
+               autocomplete="on"
+               value="{{value::input}}"
+               on-change="redirectWithNewQuantity">
+        </input>
+        <span class="plus">
+            <span class="octicon octicon-plus" on-click="increment"></span>
+        </span>
+    </template>
+
+    <script>
+        "use strict";
+        HTMLImports.whenReady(function () {
+
+            Polymer({
+                is: 'id-multiplier',
+
+                properties: {
+                    value:  String
+                },
+
+                decrement: function() {
+                    if (this.value > 1) {
+                        this.value--;
+                        let wrappers = document.querySelectorAll('.identifier-wrapper');
+                        for (let wrapper of wrappers) {
+                            if (wrapper.hasChildNodes()) {
+                                wrapper.removeChild(wrapper.lastElementChild);
+                            }
+                        }
+                        this.adaptIdentifierNumber();
+                    }
+                },
+
+                increment: function() {
+                    this.value++;
+                    let url = window.location.href;
+                    let href = url.split("?")[0].split("#")[0];
+                    let notice1 = '<id-value path="';
+                    let notice2 = '"></id-value>';
+                    let notice = notice1 + href + notice2;
+                    let tmp = document.createElement('id-value');
+                    tmp.innerHTML = notice;
+
+                    let wrappers = document.querySelectorAll('.identifier-wrapper');
+                    for (let wrapper of wrappers) {
+                        wrapper.appendChild(tmp);
+                    }
+                    this.adaptIdentifierNumber();
+                },
+
+                updateUrl: function() {
+                    let url = window.location.href;
+                    let newAdditionalURL = "";
+                    let tempArray = url.split("?");
+                    let baseURL = tempArray[0].split("#")[0];
+                    let aditionalURL = tempArray[1]; 
+                    let temp = "";
+                    if (aditionalURL) {
+                        let parameters = aditionalURL.split("#")[0];
+                        let tempArray = parameters.split("&");
+                        for (let i in tempArray) {
+                            if (tempArray[i].indexOf("quantity") == -1) {
+                                newAdditionalURL += temp + tempArray[i];
+                                temp = "&";
+                            }
+                        }
+                    }
+                    let params = temp + "quantity=" + this.value + "#identifiers";
+                    return baseURL + "?" + newAdditionalURL + params;
+                },
+
+                adaptIdentifierNumber: function() {
+                    window.history.pushState({"quantity": this.value}, "ID Service", this.updateUrl());
+                },
+
+                redirectWithNewQuantity: function() {
+                    window.location.href = this.updateUrl();
+                }
+
+              });
+
+        });
+    </script>
+
+</dom-module>

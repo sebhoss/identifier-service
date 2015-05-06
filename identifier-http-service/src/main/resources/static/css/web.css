@@ -1,0 +1,194 @@
+pre {
+  font-size: 2em;
+  font-family: monospace;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 20px;
+  border-width: 2px 0 2px 2px;
+  border-style: dotted;
+  border-color: orange;
+  border-radius: 15px;
+  color: black;
+  background-color: white;
+}
+
+body > h1 {
+  margin-left: 20px;
+}
+
+.identifiers {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.identifier {
+  flex: 1 1 auto;
+  background-color: gray;
+  border-radius: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  min-width: 680px;
+  max-width: 680px;
+}
+
+.identifier a {
+  text-decoration: underline;
+  color: white;
+}
+
+.identifier > div p {
+  color: white;
+}
+
+.identifier-container:last-child {
+  margin-bottom: 20px;
+}
+
+.identifier-block {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+.identifier-block > pre {
+  flex: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: -20px;
+}
+.identifier-block > pre:hover {
+  color: red;
+}
+
+.refresh {
+  margin-left: -40px;
+  margin-right: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+}
+.refresh:hover {
+  background-color: #8ae234;
+}
+.refresh > img {
+  padding-left: 20px;
+  padding-top: 5px;
+}
+
+.apis {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.api {
+  flex: 1 1 auto;
+  background-color: white;
+  border-radius: 15px;
+  border: 2px dotted gray;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  min-width: 680px;
+  max-width: 680px;
+}
+
+.api > div pre {
+  overflow: hidden;
+  font-size: 1em;
+}
+
+.api > div pre:hover {
+  color: red;
+}
+
+.api > div p {
+  color: black;
+}
+
+.api a {
+  text-decoration: underline;
+  color: black;
+}
+
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.header > a {
+  flex-grow: 3;
+}
+
+.header input {
+  width: 70px;
+  text-align:right;
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 15px;
+  font-size: 0.5em;
+  -moz-appearance: textfield !important;
+  -webkit-appearance: none;
+}
+
+.copied {
+   animation: copy 5s ease forwards;
+   background-color: white;
+}
+
+@keyframes copy {
+    0% { background-color: white; }
+    100% { background-color: #e3f7fc; }
+}
+
+.minus, .plus {
+  color: white;
+}
+.minus {
+  margin-left: 20px;
+  margin-right: 6px;
+  border-radius: 6px;
+  padding: 6px;
+}
+.plus {
+  margin-right: 20px;
+  margin-left: 6px;
+  border-radius: 6px;
+  padding: 6px;
+}
+.octicon-dash {
+  border-radius: 6px;
+  padding: 6px;
+  border-width: 1px 1px 1px 1px;
+  border-style: dotted;
+  border-color: orange;
+}
+.octicon-dash:hover {
+  background-color: white;
+  color: black;
+}
+.octicon-plus {
+  border-radius: 6px;
+  padding: 6px;
+  border-width: 1px 1px 1px 1px;
+  border-style: dotted;
+  border-color: orange;
+}
+.octicon-plus:hover {
+  background-color: white;
+  color: black;
+}

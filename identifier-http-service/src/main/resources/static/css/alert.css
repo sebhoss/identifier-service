@@ -1,0 +1,36 @@
+#alerts {
+    position: fixed;
+    text-align: center;
+    padding: 0.25em;
+    top: 1em;
+    left: 0;
+    right: 0;
+}
+#alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+}
+.alert-box {
+    color: #555;
+    border-radius: 15px;
+    padding: 10px 10px 10px 36px;
+    animation: alert 3s ease forwards;
+}
+.alert-box span {
+    font-weight: bold;
+}
+.alert-type {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.notice {
+    background: #e3f7fc;
+    border: 1px solid #8ed9f6;
+}
+
+@keyframes alert {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
