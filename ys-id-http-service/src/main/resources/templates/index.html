@@ -1,6 +1,56 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"></meta>
+        <title></title>
+        <meta name="description" content=""></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+        <link rel="stylesheet" href="css/normalize.css"></link>
+        <link rel="stylesheet" href="css/main.css"></link>
     </head>
     <body>
+        <h1>Random Identifiers</h1>
+
+        <div>
+            <h2>Sequence based</h2>
+
+            <p>Here is a new sequence number for you: </p>
+            <p><strong th:text="${sequence}"></strong></p>
+
+            <p>Here is a new sequence number for you using Base 36: </p>
+            <p><strong th:text="${sequence36}"></strong></p>
+
+            <p>Here is a new sequence number for you using Base 64: </p>
+            <p><strong th:text="${sequence64}"></strong></p>
+        </div>
+
+        <div>
+            <h2>UUID based</h2>
+
+            <p>Here is a new UUID for you: </p>
+            <p><strong th:text="${uuid}"></strong></p>
+
+            <p>Here is a new UUID for you using Base 36: </p>
+            <p><strong th:text="${uuid36}"></strong></p>
+
+            <p>Here is a new UUID for you using Base 64: </p>
+            <p><strong th:text="${uuid64}"></strong></p>
+        </div>
+
+        <div>
+            <h2>Timestamp based</h2>
+
+            <p>Here is a new timestamp for you: </p>
+            <p><strong th:text="${timestamp}"></strong></p>
+
+            <p>Here is a new timestamp for you using Base 36: </p>
+            <p><strong th:text="${timestamp36}"></strong></p>
+
+            <p>Here is a new timestamp for you using Base 64: </p>
+            <p><strong th:text="${timestamp64}"></strong></p>
+        </div>
+
     </body>
 </html>
