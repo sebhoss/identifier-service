@@ -11,26 +11,26 @@
         <link rel="stylesheet" href="css/main.css"></link>
     </head>
     <body>
-        <h1>Random Identifiers</h1>
+        <h1>more or less random identifiers</h1>
 
         <div>
             <h2>Sequence based</h2>
 
             <p>Here is a new sequence number for you: </p>
-            <p><strong th:text="${sequence}"></strong></p>
+            <p><strong th:text="${sequence}">1234</strong></p>
 
             <p>Here is a new sequence number for you using Base 36: </p>
-            <p><strong th:text="${sequence36}"></strong></p>
+            <p><strong th:text="${sequence36}">2356236</strong></p>
 
             <p>Here is a new sequence number for you using Base 64: </p>
-            <p><strong th:text="${sequence64}"></strong></p>
+            <p><strong th:text="${sequence64}">MAA=</strong></p>
         </div>
 
         <div>
             <h2>UUID based</h2>
 
             <p>Here is a new UUID for you: </p>
-            <p><strong th:text="${uuid}"></strong></p>
+            <p><strong th:text="${uuid}">2a5f3470-f7f8-11e4-b939-0800200c9a66</strong></p>
 
             <p>Here is a new UUID for you using Base 36: </p>
             <p><strong th:text="${uuid36}"></strong></p>
