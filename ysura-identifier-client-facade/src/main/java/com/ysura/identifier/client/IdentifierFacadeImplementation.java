@@ -77,7 +77,7 @@ class IdentifierFacadeImplementation implements IdentifierFacade {
         return get("timestamp-in-base64");
     }
 
-    private String get(String path) {
+    private String get(final String path) {
         Request request = new Request.Builder()
                 .get()
                 .url(baseUrl + path)
@@ -85,7 +85,7 @@ class IdentifierFacadeImplementation implements IdentifierFacade {
 
         try {
             return httpClient.newCall(request).execute().body().string();
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }
     }
