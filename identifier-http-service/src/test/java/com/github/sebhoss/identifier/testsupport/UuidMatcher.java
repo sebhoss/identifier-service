@@ -5,7 +5,6 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.UUID;
 
-
 /**
  * Verifies that a given String matches a valid UUID
  */

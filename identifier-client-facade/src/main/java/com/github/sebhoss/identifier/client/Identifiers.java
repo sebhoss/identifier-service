@@ -16,7 +16,7 @@ public final class Identifiers {
      * @return A new client facade using the default options
      */
     public static IdentifierFacade facade() {
-        return facade("http://sebhoss.github.io/id/");
+        return facade("http://id.xn--ho-hia.de/");
     }
 
     /**
