@@ -24,26 +24,24 @@
  *
  * For more information, please refer to <http://unlicense.org>
  */
-package com.github.sebhoss.identifier;
+package com.github.sebhoss.identifier.service;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.LongSupplier;
 
-/**
- * Small "micro"-service like application that allows its users to retrieve
- * identifiers.
- */
-@SpringBootApplication
-public class IdentifierApplication {
+import com.codahale.metrics.annotation.Timed;
 
-    /**
-     * Starts the id-service.
-     *
-     * @param args
-     *            The command line arguments.
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(IdentifierApplication.class, args);
+import org.springframework.stereotype.Repository;
+
+@Repository
+class AtomicLongSupplier implements LongSupplier {
+
+    private static final AtomicLong SEQUENCE = new AtomicLong(0L);
+
+    @Timed
+    @Override
+    public long getAsLong() {
+        return SEQUENCE.getAndIncrement();
     }
 
 }

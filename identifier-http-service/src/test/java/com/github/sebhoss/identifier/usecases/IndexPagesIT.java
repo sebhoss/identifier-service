@@ -24,26 +24,32 @@
  *
  * For more information, please refer to <http://unlicense.org>
  */
-package com.github.sebhoss.identifier;
+package com.github.sebhoss.identifier.usecases;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+
+import com.github.sebhoss.identifier.testsupport.AbstractIntegrationTest;
+
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 /**
- * Small "micro"-service like application that allows its users to retrieve
- * identifiers.
+ * Integration test for {@link IndexPages}.
  */
-@SpringBootApplication
-public class IdentifierApplication {
+public class IndexPagesIT extends AbstractIntegrationTest {
 
     /**
-     * Starts the id-service.
+     * Ensures that the index page can be access at <code>/</code>.
      *
-     * @param args
-     *            The command line arguments.
+     * @throws Exception
+     *             In case something goes wrong.
      */
-    public static void main(final String[] args) {
-        SpringApplication.run(IdentifierApplication.class, args);
+    @Test
+    public void shouldGetIndexPage() throws Exception {
+        final ResponseEntity<String> response = fetchString("/"); //$NON-NLS-1$
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
     }
 
 }

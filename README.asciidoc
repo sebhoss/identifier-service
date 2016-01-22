@@ -1,0 +1,8 @@
+
+
+- demo at https://guarded-dawn-41655.herokuapp.com/
+- cURL GET: curl --get --header "Accept: text/plain" https://guarded-dawn-41655.herokuapp.com/timestamp
+- heroku docs at https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
+- and more at https://devcenter.heroku.com/articles/deploying-java#the-procfile
+- https://devcenter.heroku.com/articles/custom-domains
+- https://github.com/heroku/heroku-buildpack-java

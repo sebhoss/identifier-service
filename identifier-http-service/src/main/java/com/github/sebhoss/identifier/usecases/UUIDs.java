@@ -1,52 +1,148 @@
 /*
- * ysura GmbH ("COMPANY") CONFIDENTIAL
- * Unpublished Copyright (c) 2012-2015 ysura GmbH, All Rights Reserved.
+ * This is free and unencumbered software released into the public domain.
  *
- * NOTICE:  All information contained herein is, and remains the property of COMPANY. The intellectual and technical concepts contained
- * herein are proprietary to COMPANY and may be covered by U.S. and Foreign Patents, patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
- * from COMPANY.  Access to the source code contained herein is hereby forbidden to anyone except current COMPANY employees, managers or contractors who have executed
- * Confidentiality and Non-disclosure agreements explicitly covering such access.
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
  *
- * The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source code, which includes
- * information that is confidential and/or proprietary, and is a trade secret, of COMPANY. ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC PERFORMANCE,
- * OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS SOURCE CODE WITHOUT THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE
- * LAWS AND INTERNATIONAL TREATIES. THE RECEIPT OR POSSESSION OF THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS
- * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT MAY DESCRIBE, IN WHOLE OR IN PART.
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * For more information, please refer to <http://unlicense.org>
  */
 package com.github.sebhoss.identifier.usecases;
+
+import com.codahale.metrics.annotation.Timed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * UUID based identifiers can be retrieved over HTTP as 'text/plain'.
+ */
 @Controller
-@RequestMapping("/uuid")
-class UUIDs {
+@RequestMapping(produces = "text/plain", method = RequestMethod.GET)
+public class UUIDs {
 
-    private final Identifiers identifiers;
+    private final API api;
 
     @Autowired
-    UUIDs(final Identifiers identifiers) {
-        this.identifiers = identifiers;
+    UUIDs(final API api) {
+        this.api = api;
     }
 
+    /**
+     * @return The next UUID.
+     */
+    @Timed
     @ResponseBody
+    @RequestMapping(HttpApi.UUID)
     public String uuid() {
-        return identifiers.nextUuid();
+        return api.nextUuid();
     }
 
+    /**
+     * @return The next UUID in Base36.
+     */
+    @Timed
     @ResponseBody
-    @RequestMapping("/base36")
+    @RequestMapping(HttpApi.UUID_BASE36)
     public String uuidInBase36() {
-        return identifiers.nextUuidInBase36();
+        return api.nextUuidInBase36();
     }
 
+    /**
+     * @return The next UUID in Base62.
+     */
+    @Timed
     @ResponseBody
-    @RequestMapping("/base64")
+    @RequestMapping(HttpApi.UUID_BASE62)
+    public String uuidInBase62() {
+        return api.nextUuidInBase62();
+    }
+
+    /**
+     * @return The next UUID in Base64.
+     */
+    @Timed
+    @ResponseBody
+    @RequestMapping(HttpApi.UUID_BASE64)
     public String uuidInBase64() {
-        return identifiers.nextUuidInBase64();
+        return api.nextUuidInBase64();
+    }
+
+    /**
+     * @return The next UUID in Base85.
+     */
+    @Timed
+    @ResponseBody
+    @RequestMapping(HttpApi.UUID_BASE85)
+    public String uuidInBase85() {
+        return api.nextUuidInBase85();
+    }
+
+    /**
+     * @return The next UUID as HashId.
+     */
+    @Timed
+    @ResponseBody
+    @RequestMapping(HttpApi.UUID_HASHID)
+    public String uuidAsHashId() {
+        return api.nextUuidAsHashId();
+    }
+
+    /**
+     * The required internal API to generate UUIDs.
+     */
+    public static interface API {
+
+        /**
+         * @return The next UUID.
+         */
+        String nextUuid();
+
+        /**
+         * @return The next UUID in Base36.
+         */
+        String nextUuidInBase36();
+
+        /**
+         * @return The next UUID in Base62.
+         */
+        String nextUuidInBase62();
+
+        /**
+         * @return The next UUID in Base64.
+         */
+        String nextUuidInBase64();
+
+        /**
+         * @return The next UUID in Base85.
+         */
+        String nextUuidInBase85();
+
+        /**
+         * @return The next UUID as a HashId.
+         */
+        String nextUuidAsHashId();
+
     }
 
 }

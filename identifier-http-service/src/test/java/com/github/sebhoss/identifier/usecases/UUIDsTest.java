@@ -1,84 +1,88 @@
 /*
- * ysura GmbH ("COMPANY") CONFIDENTIAL
- * Unpublished Copyright (c) 2012-2015 ysura GmbH, All Rights Reserved.
+ * This is free and unencumbered software released into the public domain.
  *
- * NOTICE:  All information contained herein is, and remains the property of COMPANY. The intellectual and technical concepts contained
- * herein are proprietary to COMPANY and may be covered by U.S. and Foreign Patents, patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
- * from COMPANY.  Access to the source code contained herein is hereby forbidden to anyone except current COMPANY employees, managers or contractors who have executed
- * Confidentiality and Non-disclosure agreements explicitly covering such access.
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
  *
- * The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source code, which includes
- * information that is confidential and/or proprietary, and is a trade secret, of COMPANY. ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC PERFORMANCE,
- * OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS SOURCE CODE WITHOUT THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE
- * LAWS AND INTERNATIONAL TREATIES. THE RECEIPT OR POSSESSION OF THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS
- * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT MAY DESCRIBE, IN WHOLE OR IN PART.
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * For more information, please refer to <http://unlicense.org>
  */
 package com.github.sebhoss.identifier.usecases;
 
-import org.junit.Before;
+import com.github.sebhoss.identifier.testsupport.AbstractMockMvcTest;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockServletContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.UUID;
+/**
+ * Unit test for {@link UUIDs}.
+ */
+@SuppressWarnings("nls")
+public class UUIDsTest extends AbstractMockMvcTest<UUIDs, UUIDs.API> {
 
-import static com.github.sebhoss.identifier.testsupport.UuidMatcher.isValidUUID;
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MockServletContext.class)
-@WebAppConfiguration
-public class UUIDsTest {
-
-    private MockMvc mvc;
-    private Identifiers identifierService;
-
-    @Before
-    public void setUp() throws Exception {
-        identifierService = Mockito.mock(Identifiers.class);
-
-        mvc = MockMvcBuilders.standaloneSetup(new UUIDs(identifierService)).build();
+    /**
+     * Provides the superclass with required infrastructure.
+     */
+    public UUIDsTest() {
+        super(UUIDs::new, UUIDs.API.class);
     }
 
+    /**
+     * Ensures that an UUID can be retrieved from <code>/uuid</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
     @Test
-    public void getUuid() throws Exception {
-        given(identifierService.nextUuid()).willReturn(UUID.randomUUID().toString());
+    public void shouldGetUuid() throws Exception {
+        expectedResult = "0930b880-c13a-11e5-a837-0800200c9a66";
+        supplier = api::nextUuid;
 
-        mvc.perform(MockMvcRequestBuilders.get("/uuid").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(isValidUUID()));
+        requestAndVerify("/uuid");
     }
 
+    /**
+     * Ensures that an UUID in Base36 can be retrieved from <code>/uuid/base36</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
     @Test
-    public void getUuidInBase36() throws Exception {
-        final String result = "9xyplmzaulvyb16rmz32qg1rw";
-        given(identifierService.nextUuidInBase36()).willReturn(result);
+    public void shouldGetUuidInBase36() throws Exception {
+        expectedResult = "9xyplmzaulvyb16rmz32qg1rw=";
+        supplier = api::nextUuidInBase36;
 
-        mvc.perform(MockMvcRequestBuilders.get("/uuid-in-base36").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo(result)));
+        requestAndVerify("/uuid/base36");
     }
 
+    /**
+     * Ensures that an UUID in Base36 can be retrieved from <code>/uuid/base64</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
     @Test
-    public void getUuidInBase64() throws Exception {
-        final String result = "Y2UyNGI3OTM2OTFlNDViZjhmN2RhOTU3ZWZjNzNlNTU=";
-        given(identifierService.nextUuidInBase64()).willReturn(result);
+    public void shouldGetUuidInBase64() throws Exception {
+        expectedResult = "Y2UyNGI3OTM2OTFlNDViZjhmN2RhOTU3ZWZjNzNlNTU=";
+        supplier = api::nextUuidInBase64;
 
-        mvc.perform(MockMvcRequestBuilders.get("/uuid-in-base64").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo(result)));
+        requestAndVerify("/uuid/base64");
     }
 
 }

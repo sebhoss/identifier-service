@@ -26,24 +26,20 @@
  */
 package com.github.sebhoss.identifier;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.junit.Test;
 
 /**
- * Small "micro"-service like application that allows its users to retrieve
- * identifiers.
+ * Unit test for {@link IdentifierApplication}.
  */
-@SpringBootApplication
-public class IdentifierApplication {
+public class IdentifierApplicationTest {
 
     /**
-     * Starts the id-service.
-     *
-     * @param args
-     *            The command line arguments.
+     * Ensures that the main method exists.
      */
-    public static void main(final String[] args) {
-        SpringApplication.run(IdentifierApplication.class, args);
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldHavePublicMainMethod() {
+        IdentifierApplication.main(new String[] {});
     }
 
 }

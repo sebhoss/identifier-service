@@ -24,26 +24,23 @@
  *
  * For more information, please refer to <http://unlicense.org>
  */
-package com.github.sebhoss.identifier;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.github.sebhoss.identifier.client;
 
 /**
- * Small "micro"-service like application that allows its users to retrieve
- * identifiers.
+ * Facade for the ID HTTP service. Can be used by clients who don't want to think about HTTP and/or where the remote is located
  */
-@SpringBootApplication
-public class IdentifierApplication {
+public interface IdentifierHttpClient {
 
-    /**
-     * Starts the id-service.
-     *
-     * @param args
-     *            The command line arguments.
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(IdentifierApplication.class, args);
-    }
+    String getNextSequence();
+    String getNextSequenceInBase36();
+    String getNextSequenceInBase64();
+
+    String getNextUuid();
+    String getNextUuidInBase36();
+    String getNextUuidInBase64();
+
+    String getNextTimestamp();
+    String getNextTimestampInBase36();
+    String getNextTimestampInBase64();
 
 }

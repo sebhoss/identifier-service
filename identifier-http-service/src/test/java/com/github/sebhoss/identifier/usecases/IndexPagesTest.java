@@ -24,26 +24,37 @@
  *
  * For more information, please refer to <http://unlicense.org>
  */
-package com.github.sebhoss.identifier;
+package com.github.sebhoss.identifier.usecases;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.github.sebhoss.identifier.testsupport.AbstractMockMvcTest;
+
+import org.junit.Test;
 
 /**
- * Small "micro"-service like application that allows its users to retrieve
- * identifiers.
+ * Unit test for {@link IndexPages}.
  */
-@SpringBootApplication
-public class IdentifierApplication {
+@SuppressWarnings("nls")
+public class IndexPagesTest extends AbstractMockMvcTest<IndexPages, IndexPages.API> {
 
     /**
-     * Starts the id-service.
-     *
-     * @param args
-     *            The command line arguments.
+     * Provides the superclass with required infrastructure.
      */
-    public static void main(final String[] args) {
-        SpringApplication.run(IdentifierApplication.class, args);
+    public IndexPagesTest() {
+        super(IndexPages::new, IndexPages.API.class);
+    }
+
+    /**
+     * Ensures that the index page can be access at <code>/</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
+    @Test
+    public void shouldGetIndexPage() throws Exception {
+        html("/")
+                .andExpect(status().isOk());
     }
 
 }
