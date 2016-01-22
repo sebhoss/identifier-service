@@ -2,11 +2,13 @@ package com.github.sebhoss.identifier.persistence;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.function.LongSupplier;
+
 @Repository
-class IdentifierRepositoryImplementation implements IdentifierRepository {
+class DatabaseLongSupplier implements LongSupplier {
 
     @Override
-    public long nextSequenceValue() {
+    public long getAsLong() {
         // TODO Auto-generated method stub
         return 0;
     }

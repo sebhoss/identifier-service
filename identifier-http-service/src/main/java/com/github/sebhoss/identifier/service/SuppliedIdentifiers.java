@@ -1,40 +1,41 @@
 package com.github.sebhoss.identifier.service;
 
-import com.github.sebhoss.identifier.persistence.IdentifierRepository;
+import com.github.sebhoss.identifier.usecases.Identifiers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.Base64;
 import java.util.UUID;
+import java.util.function.LongSupplier;
 
 import static java.lang.String.valueOf;
 import static java.lang.System.currentTimeMillis;
 import static java.util.UUID.randomUUID;
 
 @Service
-class IdentifierServiceImplementation implements IdentifierService {
+class SuppliedIdentifiers implements Identifiers {
 
-    private final IdentifierRepository identifierRepository;
+    private final LongSupplier longSupplier;
 
     @Autowired
-    IdentifierServiceImplementation(final IdentifierRepository identifierRepository) {
-        this.identifierRepository = identifierRepository;
+    SuppliedIdentifiers(final LongSupplier longSupplier) {
+        this.longSupplier = longSupplier;
     }
 
     @Override
     public String nextSequence() {
-        return valueOf(identifierRepository.nextSequenceValue());
+        return valueOf(longSupplier.getAsLong());
     }
 
     @Override
     public String nextSequenceInBase36() {
-        return convertDecToBase36(valueOf(identifierRepository.nextSequenceValue()));
+        return convertDecToBase36(valueOf(longSupplier.getAsLong()));
     }
 
     @Override
     public String nextSequenceInBase64() {
-        return convertStringToBase64(valueOf(identifierRepository.nextSequenceValue()));
+        return convertStringToBase64(valueOf(longSupplier.getAsLong()));
     }
 
     @Override
