@@ -307,7 +307,7 @@
 
                 <div>
                     <p>Declare Maven dependency, and create a client:</p>
-                    <pre>final IdentifierHttpClient client = IdentifierHttpClients.client("localhost:8080");</pre>
+                    <pre th:text="'final IdentifierHttpClient client = IdentifierHttpClients.client(&quot;' + ${HOST} + '&quot;);'"></pre>
                 </div>
 
                 <div th:if="${sequence}">
@@ -336,7 +336,7 @@
 
                 <div>
                     <p>Declare Maven dependency, and create a client:</p>
-                    <pre>final IdentifierHttpClient client = IdentifierHttpClients.client("localhost:8080");</pre>
+                    <pre th:text="'final IdentifierHttpClient client = IdentifierHttpClients.client(&quot;' + ${HOST} + '&quot;);'"></pre>
                 </div>
 
                 <div th:if="${timestamp}">
@@ -365,7 +365,7 @@
 
                 <div>
                     <p>Declare Maven dependency, and create a client:</p>
-                    <pre>final IdentifierHttpClient client = IdentifierHttpClients.client("localhost:8080");</pre>
+                    <pre th:text="'final IdentifierHttpClient client = IdentifierHttpClients.client(&quot;' + ${HOST} + '&quot;);'"></pre>
                 </div>
 
                 <div th:if="${uuid}">
