@@ -58,6 +58,7 @@
     <failBuildOnDuplicates>false</failBuildOnDuplicates>
     <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
     <failBuildOnDependencyProblem>false</failBuildOnDependencyProblem>
+    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <dependencyManagement>

@@ -20,7 +20,8 @@ const notice1 = '<div class="alert-box notice">';
 const notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
 const notice3 = '</div>';
 
-document.addEventListener("DOMContentLoaded", function(event) {
+// DOMContentLoaded
+window.addEventListener('WebComponentsReady', function(e) {
     let identifiers = document.querySelectorAll('pre');
 
     for (let index in identifiers) {
