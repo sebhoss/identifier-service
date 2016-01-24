@@ -34,8 +34,8 @@ body > h1 {
   padding-right: 20px;
   padding-top: 0px;
   padding-bottom: 10px;
-  min-width: 650px;
-  max-width: 650px;
+  min-width: 680px;
+  max-width: 680px;
 }
 
 .identifier a {
@@ -57,20 +57,29 @@ body > h1 {
   align-items: center;
   justify-content: center;
 }
-
 .identifier-block > pre {
   flex: 1;
   margin-top: 0;
   margin-bottom: 0;
+  margin-right: -20px;
 }
-
 .identifier-block > pre:hover {
   color: red;
 }
 
-.identifier-block > img {
+.refresh {
   margin-left: -40px;
   margin-right: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+}
+.refresh:hover {
+  background-color: #8ae234;
+}
+.refresh > img {
+  padding-left: 20px;
+  padding-top: 5px;
 }
 
 .apis {
@@ -92,8 +101,8 @@ body > h1 {
   padding-right: 20px;
   padding-top: 0px;
   padding-bottom: 10px;
-  min-width: 650px;
-  max-width: 650px;
+  min-width: 680px;
+  max-width: 680px;
 }
 
 .api > div > pre {

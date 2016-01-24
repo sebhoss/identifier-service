@@ -89,16 +89,6 @@ public class UUIDs {
     }
 
     /**
-     * @return The next UUID in Base85.
-     */
-    @Timed
-    @ResponseBody
-    @RequestMapping(HttpApi.UUID_BASE85)
-    public String uuidInBase85() {
-        return api.nextUuidInBase85();
-    }
-
-    /**
      * @return The next UUID as HashId.
      */
     @Timed
@@ -132,11 +122,6 @@ public class UUIDs {
          * @return The next UUID in Base64.
          */
         String nextUuidInBase64();
-
-        /**
-         * @return The next UUID in Base85.
-         */
-        String nextUuidInBase85();
 
         /**
          * @return The next UUID as a HashId.

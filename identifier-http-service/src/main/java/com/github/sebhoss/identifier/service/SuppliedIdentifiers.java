@@ -32,7 +32,7 @@ import static java.util.UUID.randomUUID;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64.Encoder;
 import java.util.UUID;
 import java.util.function.LongSupplier;
@@ -85,11 +85,6 @@ class SuppliedIdentifiers implements IndexPages.API {
     }
 
     @Override
-    public String nextSequenceInBase85() {
-        return Base85.encode(getBytes(valueOf(longSupplier.getAsLong())));
-    }
-
-    @Override
     public String nextSequenceAsHashId() {
         return hashids.encode(longSupplier.getAsLong());
     }
@@ -118,11 +113,6 @@ class SuppliedIdentifiers implements IndexPages.API {
     }
 
     @Override
-    public String nextTimestampInBase85() {
-        return Base85.encode(getBytes(valueOf(currentTimeMillis())));
-    }
-
-    @Override
     public String nextTimestampAsHashId() {
         return hashids.encode(currentTimeMillis());
     }
@@ -148,15 +138,6 @@ class SuppliedIdentifiers implements IndexPages.API {
     @Override
     public String nextUuidInBase64() {
         return convertUuidToBase64(randomUUID());
-    }
-
-    @Override
-    public String nextUuidInBase85() {
-        final UUID uuid = randomUUID();
-        final ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
-        bb.putLong(uuid.getMostSignificantBits());
-        bb.putLong(uuid.getLeastSignificantBits());
-        return Base85.encode(bb.array());
     }
 
     @Override
@@ -196,7 +177,7 @@ class SuppliedIdentifiers implements IndexPages.API {
     }
 
     private static byte[] getBytes(final String value) {
-        return value.getBytes(Charset.defaultCharset());
+        return value.getBytes(StandardCharsets.US_ASCII);
     }
 
     private static String removePadding(final String string) {

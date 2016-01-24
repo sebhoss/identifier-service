@@ -71,7 +71,12 @@
     <artifactId>normalize.css</artifactId>
     <version>3.0.2</version>
 </dependency>
-    
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>polymer</artifactId>
+    <version>1.0.8</version>
+</dependency>
+
         <!-- Spring -->
          <dependency>
         <groupId>org.springframework.boot</groupId>

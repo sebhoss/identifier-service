@@ -1,0 +1,57 @@
+<dom-module id="id-value">
+
+    <template>
+        <div class="identifier-container">
+            <div class="identifier-block">
+                <pre><strong>{{value}}</strong></pre>
+                <span class="refresh" on-click="refresh">
+                    <img src="/images/refresh.svg" width="20px" height="20px"></img>
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        "use strict";
+        HTMLImports.whenReady(function () {
+
+            Polymer({
+                is: 'id-value',
+
+                properties: {
+                    path: String,
+                    value: String
+                },
+
+                attached: function() {
+                    if (!this.value) {
+                        this.refresh();
+                    }
+                },
+
+                refresh: function() {
+                    var httpRequest = new XMLHttpRequest();
+
+                    if (!httpRequest) {
+                        return false;
+                    }
+
+                    httpRequest.addEventListener('readystatechange', function () {
+                        if (httpRequest.readyState == XMLHttpRequest.DONE ) {
+                            if (httpRequest.status == 200) {
+                                this.value = httpRequest.responseText;
+                            }
+                         }
+                      }.bind(this));
+
+                    httpRequest.open("GET", this.path, true);
+                    httpRequest.setRequestHeader('Accept', 'text/plain');
+                    httpRequest.send();
+                }
+
+              });
+
+        });
+    </script>
+
+</dom-module>

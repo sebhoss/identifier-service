@@ -89,16 +89,6 @@ public class Timestamps {
     }
 
     /**
-     * @return The current timestamp in Base85.
-     */
-    @Timed
-    @ResponseBody
-    @RequestMapping(HttpApi.TIMESTAMP_BASE85)
-    public String timestampInBase85() {
-        return api.nextTimestampInBase85();
-    }
-
-    /**
      * @return The current timestamp as HashId.
      */
     @Timed
@@ -132,11 +122,6 @@ public class Timestamps {
          * @return The current timestamp in Base64.
          */
         String nextTimestampInBase64();
-
-        /**
-         * @return The current timestamp in Base85.
-         */
-        String nextTimestampInBase85();
 
         /**
          * @return The current timestamp as a HashId.

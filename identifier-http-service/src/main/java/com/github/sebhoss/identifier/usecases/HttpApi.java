@@ -37,11 +37,6 @@ final class HttpApi {
     public static final String SEQUENCE_BASE64 = SEQUENCES + "/base64";
 
     /**
-     * The <code>SEQUENCE_BASE85</code> endpoints exposes a sequence based identifiers in Base85.
-     */
-    public static final String SEQUENCE_BASE85 = SEQUENCES + "/base85";
-
-    /**
      * The <code>SEQUENCE_HASHID</code> endpoints exposes a sequence based identifiers as HashId.
      */
     public static final String SEQUENCE_HASHID = SEQUENCES + "/hashid";
@@ -72,11 +67,6 @@ final class HttpApi {
     public static final String TIMESTAMP_BASE64 = TIMESTAMPS + "/base64";
 
     /**
-     * The <code>TIMESTAMP_BASE85</code> endpoints exposes a timestamp based identifiers in Base85.
-     */
-    public static final String TIMESTAMP_BASE85 = TIMESTAMPS + "/base85";
-
-    /**
      * The <code>TIMESTAMP_HASHID</code> endpoints exposes a timestamp based identifiers as HashId.
      */
     public static final String TIMESTAMP_HASHID = TIMESTAMPS + "/hashid";
@@ -105,11 +95,6 @@ final class HttpApi {
      * The <code>UUID_BASE64</code> endpoints exposes a UUID based identifiers in Base64.
      */
     public static final String UUID_BASE64 = UUIDS + "/base64";
-
-    /**
-     * The <code>UUID_BASE85</code> endpoints exposes a UUID based identifiers in Base85.
-     */
-    public static final String UUID_BASE85 = UUIDS + "/base85";
 
     /**
      * The <code>UUID_HASHID</code> endpoints exposes a UUID based identifiers as HashId.

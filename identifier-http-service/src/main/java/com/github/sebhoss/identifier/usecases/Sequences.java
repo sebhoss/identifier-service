@@ -89,16 +89,6 @@ public class Sequences {
     }
 
     /**
-     * @return The next sequence number in Base85.
-     */
-    @Timed
-    @ResponseBody
-    @RequestMapping(HttpApi.SEQUENCE_BASE85)
-    public String sequenceInBase85() {
-        return api.nextSequenceInBase85();
-    }
-
-    /**
      * @return The next sequence number as HashId.
      */
     @Timed
@@ -132,11 +122,6 @@ public class Sequences {
          * @return The next sequence number in Base64.
          */
         String nextSequenceInBase64();
-
-        /**
-         * @return The next sequence number in Base85.
-         */
-        String nextSequenceInBase85();
 
         /**
          * @return The next sequence number as a HashId.

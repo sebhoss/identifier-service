@@ -59,7 +59,7 @@ public class IndexPages {
     @Timed
     @RequestMapping(HttpApi.ROOT)
     public String root(final Model model) {
-        enrichSequences(model);
+        showAllSequences(model);
         enrichTimestamps(model);
         enrichUuids(model);
         return "index";
@@ -74,8 +74,9 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCES)
+    @SuppressWarnings("static-method")
     public String sequences(final Model model) {
-        enrichSequences(model);
+        showAllSequences(model);
         return "index";
     }
 
@@ -88,6 +89,7 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE)
+    @SuppressWarnings("static-method")
     public String sequence(final Model model) {
         showSequences(model);
         showSequence(model);
@@ -103,6 +105,7 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE36)
+    @SuppressWarnings("static-method")
     public String sequence36(final Model model) {
         showSequences(model);
         showSequenceInBase36(model);
@@ -118,6 +121,7 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE62)
+    @SuppressWarnings("static-method")
     public String sequence62(final Model model) {
         showSequences(model);
         showSequenceInBase62(model);
@@ -133,24 +137,10 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE64)
+    @SuppressWarnings("static-method")
     public String sequence64(final Model model) {
         showSequences(model);
         showSequenceInBase64(model);
-        return "index";
-    }
-
-    /**
-     * Shows the sequence page which only shows sequence identifiers in Base85.
-     *
-     * @param model
-     *            The view model.
-     * @return The name of the view to show.
-     */
-    @Timed
-    @RequestMapping(HttpApi.SEQUENCE_BASE85)
-    public String sequence85(final Model model) {
-        showSequences(model);
-        showSequenceInBase85(model);
         return "index";
     }
 
@@ -163,19 +153,19 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_HASHID)
+    @SuppressWarnings("static-method")
     public String sequenceHashId(final Model model) {
         showSequences(model);
         showSequenceAsHashId(model);
         return "index";
     }
 
-    private void enrichSequences(final Model model) {
+    private static void showAllSequences(final Model model) {
         showSequences(model);
         showSequence(model);
         showSequenceInBase36(model);
         showSequenceInBase62(model);
         showSequenceInBase64(model);
-        showSequenceInBase85(model);
         showSequenceAsHashId(model);
     }
 
@@ -183,28 +173,24 @@ public class IndexPages {
         model.addAttribute("sequences", Boolean.TRUE);
     }
 
-    private void showSequence(final Model model) {
-        model.addAttribute("sequence", api.nextSequence());
+    private static void showSequence(final Model model) {
+        model.addAttribute("sequence", Boolean.TRUE);
     }
 
-    private void showSequenceInBase36(final Model model) {
-        model.addAttribute("sequence36", api.nextSequenceInBase36());
+    private static void showSequenceInBase36(final Model model) {
+        model.addAttribute("sequence36", Boolean.TRUE);
     }
 
-    private void showSequenceInBase62(final Model model) {
-        model.addAttribute("sequence62", api.nextSequenceInBase62());
+    private static void showSequenceInBase62(final Model model) {
+        model.addAttribute("sequence62", Boolean.TRUE);
     }
 
-    private void showSequenceInBase64(final Model model) {
-        model.addAttribute("sequence64", api.nextSequenceInBase64());
+    private static void showSequenceInBase64(final Model model) {
+        model.addAttribute("sequence64", Boolean.TRUE);
     }
 
-    private void showSequenceInBase85(final Model model) {
-        model.addAttribute("sequence85", api.nextSequenceInBase85());
-    }
-
-    private void showSequenceAsHashId(final Model model) {
-        model.addAttribute("sequenceHashId", api.nextSequenceAsHashId());
+    private static void showSequenceAsHashId(final Model model) {
+        model.addAttribute("sequenceHashId", Boolean.TRUE);
     }
 
     /**
@@ -282,21 +268,6 @@ public class IndexPages {
     }
 
     /**
-     * Shows the timestamp page which only shows timestamp identifiers in Base85.
-     *
-     * @param model
-     *            The view model.
-     * @return The name of the view to show.
-     */
-    @Timed
-    @RequestMapping(HttpApi.TIMESTAMP_BASE85)
-    public String timestamp85(final Model model) {
-        showTimestamps(model);
-        showTimestampInBase85(model);
-        return "index";
-    }
-
-    /**
      * Shows the timestamp page which only shows timestamp identifiers as HashId.
      *
      * @param model
@@ -317,7 +288,6 @@ public class IndexPages {
         showTimestampInBase36(model);
         showTimestampInBase62(model);
         showTimestampInBase64(model);
-        showTimestampInBase85(model);
         showTimestampAsHashId(model);
     }
 
@@ -339,10 +309,6 @@ public class IndexPages {
 
     private void showTimestampInBase64(final Model model) {
         model.addAttribute("timestamp64", api.nextTimestampInBase64());
-    }
-
-    private void showTimestampInBase85(final Model model) {
-        model.addAttribute("timestamp85", api.nextTimestampInBase85());
     }
 
     private void showTimestampAsHashId(final Model model) {
@@ -424,21 +390,6 @@ public class IndexPages {
     }
 
     /**
-     * Shows the UUID page which only shows UUID identifiers in Base85.
-     *
-     * @param model
-     *            The view model.
-     * @return The name of the view to show.
-     */
-    @Timed
-    @RequestMapping(HttpApi.UUID_BASE85)
-    public String uuid85(final Model model) {
-        showUuids(model);
-        showUuidInBase85(model);
-        return "index";
-    }
-
-    /**
      * Shows the UUID page which only shows UUID identifiers as HashId.
      *
      * @param model
@@ -459,7 +410,6 @@ public class IndexPages {
         showUuidInBase36(model);
         showUuidInBase62(model);
         showUuidInBase64(model);
-        showUuidInBase85(model);
         showUuidAsHashId(model);
     }
 
@@ -481,10 +431,6 @@ public class IndexPages {
 
     private void showUuidInBase64(final Model model) {
         model.addAttribute("uuid64", api.nextUuidInBase64());
-    }
-
-    private void showUuidInBase85(final Model model) {
-        model.addAttribute("uuid85", api.nextUuidInBase85());
     }
 
     private void showUuidAsHashId(final Model model) {
