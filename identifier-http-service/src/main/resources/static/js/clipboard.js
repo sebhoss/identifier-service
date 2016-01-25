@@ -1,3 +1,5 @@
+// https://gist.github.com/lgarron/d1dee380f4ed9d825ca7
+
 "use strict";
 
 const notice1 = '<div class="alert-box notice">';
