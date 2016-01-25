@@ -1,9 +1,14 @@
 <dom-module id="id-value">
 
     <template>
+        <style>
+            .identifier-container {}
+            .identifier-block {}
+            .refresh {}
+        </style>
         <div class="identifier-container">
             <div class="identifier-block">
-                <pre><strong>{{value}}</strong></pre>
+                <pre><strong>[[value]]</strong></pre>
                 <span class="refresh" on-click="refresh">
                     <img src="/images/refresh.svg" width="20px" height="20px"></img>
                 </span>
