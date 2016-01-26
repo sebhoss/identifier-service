@@ -43,7 +43,7 @@ body > h1 {
   color: white;
 }
 
-.identifier > div > p {
+.identifier > div p {
   color: white;
 }
 
@@ -105,20 +105,49 @@ body > h1 {
   max-width: 680px;
 }
 
-.api > div > pre {
+.api > div pre {
   overflow: hidden;
   font-size: 1em;
 }
 
-.api > div > pre:hover {
+.api > div pre:hover {
   color: red;
 }
 
-.api > div > p {
+.api > div p {
   color: black;
 }
 
 .api a {
   text-decoration: underline;
   color: black;
+}
+
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.header > a {
+  flex-grow: 3;
+}
+
+.header input {
+  width: 70px;
+  text-align:right;
+  margin-right: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  font-size: 0.5em;
+}
+
+.copied {
+   animation: copy 5s ease forwards;
+   background-color: white;
+}
+
+@keyframes copy {
+    0% { background-color: white; }
+    100% { background-color: #e3f7fc; }
 }

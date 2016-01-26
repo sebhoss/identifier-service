@@ -40,6 +40,7 @@
         <script src="/webjars/webcomponentsjs/0.7.2/webcomponents-lite.min.js"></script>
         <link rel="import" href="/webjars/polymer/1.0.8/polymer.html"></link>
         <link rel="import" href="/imports/id-value.html"></link>
+        <link rel="import" href="/imports/id-multiplier.html"></link>
         <script src="/js/clipboard.js" type="application/javascript"></script>
         <script src="/js/clipboard.js" type="application/javascript;version=1.7"></script>
     </head>
@@ -51,75 +52,69 @@
         <h1 id="identifiers"><a href="/#identifiers">Identifiers</a></h1>
         <div class="identifiers">
             <div th:if="${sequences}" class="identifier">
-                <h2><a th:href="@{/sequences#identifiers}">Sequences</a></h2>
+                <h2 class="header">
+                    <a th:href="@{/sequences#identifiers}">Sequences</a>
+                    <id-multiplier th:if="${quantity}" th:attr="value=${quantity}"></id-multiplier>
+                </h2>
 
                 <div th:if="${sequence}">
-                    <p>Here is a <a th:href="@{/sequences/sequence#identifiers}">new sequence</a> for you:</p>
-                    <id-value th:attr="path=@{/sequences/sequence}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/sequences/sequence}, name='sequence', type='plain text')"></div>
                 </div>
                 <div th:if="${sequence36}">
-                    <p>Here is a <a th:href="@{/sequences/base36#identifiers}">new sequence</a> for you in <strong>Base36</strong>:</p>
-                    <id-value th:attr="path=@{/sequences/base36}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/sequences/base36}, name='sequence', type='Base36')"></div>
                 </div>
                 <div th:if="${sequence62}">
-                    <p>Here is a <a th:href="@{/sequences/base62#identifiers}">new sequence</a> for you in <strong>Base62</strong>:</p>
-                    <id-value th:attr="path=@{/sequences/base62}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/sequences/base62}, name='sequence', type='Base62')"></div>
                 </div>
                 <div th:if="${sequence64}">
-                    <p>Here is a <a th:href="@{/sequences/base64#identifiers}">new sequence</a> for you in <strong>Base64</strong>:</p>
-                    <id-value th:attr="path=@{/sequences/base64}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/sequences/base64}, name='sequence', type='Base64')"></div>
                 </div>
                 <div th:if="${sequenceHashId}">
-                    <p>Here is a <a th:href="@{/sequences/hashid#identifiers}">new sequence</a> for you in <strong>HashId</strong>:</p>
-                    <id-value th:attr="path=@{/sequences/hashid}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/sequences/hashid}, name='sequence', type='HashId')"></div>
                 </div>
             </div>
             <div th:if="${timestamps}" class="identifier">
-                <h2><a th:href="@{/timestamps#identifiers}">Timestamps</a></h2>
+                <h2 class="header">
+                    <a th:href="@{/timestamps#identifiers}">Timestamps</a>
+                    <id-multiplier th:if="${quantity}" th:attr="value=${quantity}"></id-multiplier>
+                </h2>
 
                 <div th:if="${timestamp}">
-                    <p>Here is a <a th:href="@{/timestamps/timestamp#identifiers}">new timestamp</a> for you:</p>
-                    <id-value th:attr="path=@{/timestamps/timestamp}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/timestamps/timestamp}, name='timestamp', type='plain text')"></div>
                 </div>
                 <div th:if="${timestamp36}">
-                    <p>Here is a <a th:href="@{/timestamps/base36#identifiers}">new timestamp</a> for you in <strong>Base36</strong>:</p>
-                    <id-value th:attr="path=@{/timestamps/base36}, value=${timestamp36}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/timestamps/base36}, name='timestamp', type='Base36')"></div>
                 </div>
                 <div th:if="${timestamp62}">
-                    <p>Here is a <a th:href="@{/timestamps/base62#identifiers}">new timestamp</a> for you in <strong>Base62</strong>:</p>
-                    <id-value th:attr="path=@{/timestamps/base62}, value=${timestamp62}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/timestamps/base62}, name='timestamp', type='Base62')"></div>
                 </div>
                 <div th:if="${timestamp64}">
-                    <p>Here is a <a th:href="@{/timestamps/base64#identifiers}">new timestamp</a> for you in <strong>Base64</strong>:</p>
-                    <id-value th:attr="path=@{/timestamps/base64}, value=${timestamp64}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/timestamps/base64}, name='timestamp', type='Base64')"></div>
                 </div>
                 <div th:if="${timestampHashId}">
-                    <p>Here is a <a th:href="@{/timestamps/hashid#identifiers}">new timestamp</a> for you as <strong>HashId</strong>:</p>
-                    <id-value th:attr="path=@{/timestamps/hashid}, value=${timestampHashId}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/timestamps/hashid}, name='timestamp', type='HashId')"></div>
                 </div>
             </div>
             <div th:if="${uuids}" class="identifier">
-                <h2><a th:href="@{/uuids#identifiers}">UUIDs</a></h2>
+                <h2 class="header">
+                    <a th:href="@{/uuids#identifiers}">UUIDs</a>
+                    <id-multiplier th:if="${quantity}" th:attr="value=${quantity}"></id-multiplier>
+                </h2>
 
                 <div th:if="${uuid}">
-                    <p>Here is a <a th:href="@{/uuids/uuid#identifiers}">new UUID</a> for you:</p>
-                    <id-value th:attr="path=@{/uuids/uuid}, value=${uuid}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/uuids/uuid}, name='UUID', type='plain text')"></div>
                 </div>
                 <div th:if="${uuid36}">
-                    <p>Here is a <a th:href="@{/uuids/base36#identifiers}">new UUID</a> for you in <strong>Base36</strong>:</p>
-                    <id-value th:attr="path=@{/uuids/base36}, value=${uuid36}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/uuids/base36}, name='UUID', type='Base36')"></div>
                 </div>
                 <div th:if="${uuid62}">
-                    <p>Here is a <a th:href="@{/uuids/base62#identifiers}">new UUID</a> for you in <strong>Base62</strong>:</p>
-                    <id-value th:attr="path=@{/uuids/base62}, value=${uuid62}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/uuids/base62}, name='UUID', type='Base62')"></div>
                 </div>
                 <div th:if="${uuid64}">
-                    <p>Here is a <a th:href="@{/uuids/base64#identifiers}">new UUID</a> for you in <strong>Base64</strong>:</p>
-                    <id-value th:attr="path=@{/uuids/base64}, value=${uuid64}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/uuids/base64}, name='UUID', type='Base64')"></div>
                 </div>
                 <div th:if="${uuidHashId}">
-                    <p>Here is a <a th:href="@{/uuids/hashid#identifiers}">new UUID</a> for you as <strong>HashId</strong>:</p>
-                    <id-value th:attr="path=@{/uuids/hashid}, value=${uuidHashId}"></id-value>
+                    <div th:replace="identifier :: id (quantity=${quantity}, path=@{/uuids/hashid}, name='UUID', type='HashId')"></div>
                 </div>
             </div>
         </div>
@@ -130,72 +125,57 @@
                 <h2><a th:href="@{/sequences#apis}">Sequences</a></h2>
 
                 <div th:if="${sequence}">
-                    <p>Create a <a th:href="@{/sequences/sequence#apis}">new sequence</a> using cURL with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/sequences/sequence(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/sequences/sequence}, name='sequence', type='plain text')"></div>
                 </div>
                 <div th:if="${sequence36}">
-                    <p>Create a <a th:href="@{/sequences/base36#apis}">new sequence</a> using cURL in <strong>Base36</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/sequences/base36(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/sequences/base36}, name='sequence', type='Base36')"></div>
                 </div>
                 <div th:if="${sequence62}">
-                    <p>Create a <a th:href="@{/sequences/base62#apis}">new sequence</a> using cURL in <strong>Base62</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/sequences/base62(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/sequences/base62}, name='sequence', type='Base62')"></div>
                 </div>
                 <div th:if="${sequence64}">
-                    <p>Create a <a th:href="@{/sequences/base64#apis}">new sequence</a> using cURL in <strong>Base64</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/sequences/base64(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/sequences/base64}, name='sequence', type='Base64')"></div>
                 </div>
                 <div th:if="${sequenceHashId}">
-                    <p>Create a <a th:href="@{/sequences/hashid#apis}">new sequence</a> using cURL as <strong>HashId</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/sequences/hashid(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/sequences/hashId}, name='sequence', type='HashId')"></div>
                 </div>
             </div>
             <div th:if="${timestamps}" class="api">
                 <h2><a th:href="@{/timestamps#apis}">Timestamps</a></h2>
 
                 <div th:if="${timestamp}">
-                    <p>Create a <a th:href="@{/timestamps/timestamp#apis}">new timestamp</a> using cURL with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/timestamps/timestamp(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/timestamps/timestamp}, name='timestamp', type='plain text')"></div>
                 </div>
                 <div th:if="${timestamp36}">
-                    <p>Create a <a th:href="@{/timestamps/base36#apis}">new timestamp</a> using cURL in <strong>Base36</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/timestamps/base36(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/timestamps/base36}, name='timestamp', type='Base36')"></div>
                 </div>
                 <div th:if="${timestamp62}">
-                    <p>Create a <a th:href="@{/timestamps/base62#apis}">new timestamp</a> using cURL in <strong>Base62</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/timestamps/base62(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/timestamps/base62}, name='timestamp', type='Base62')"></div>
                 </div>
                 <div th:if="${timestamp64}">
-                    <p>Create a <a th:href="@{/timestamps/base64#apis}">new timestamp</a> using cURL in <strong>Base64</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/timestamps/base64(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/timestamps/base64}, name='timestamp', type='Base64')"></div>
                 </div>
                 <div th:if="${timestampHashId}">
-                    <p>Create a <a th:href="@{/timestamps/hashid#apis}">new timestamp</a> using cURL as <strong>HashId</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/timestamps/hashid(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/timestamps/hashid}, name='timestamp', type='HashId')"></div>
                 </div>
             </div>
             <div th:if="${uuids}" class="api">
                 <h2><a th:href="@{/uuids#apis}">UUIDs</a></h2>
 
                 <div th:if="${uuid}">
-                    <p>Create a <a th:href="@{/uuids/uuid#apis}">new UUID</a> using cURL with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/uuids/uuid(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/uuids/uuid}, name='UUID', type='plain text')"></div>
                 </div>
                 <div th:if="${uuid36}">
-                    <p>Create a <a th:href="@{/uuids/base36#apis}">new UUID</a> using cURL in <strong>Base36</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/uuids/base36(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/uuids/base36}, name='UUID', type='Base36')"></div>
                 </div>
                 <div th:if="${uuid62}">
-                    <p>Create a <a th:href="@{/uuids/base62#apis}">new UUID</a> using cURL in <strong>Base62</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/uuids/base62(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/uuids/base62}, name='UUID', type='Base62')"></div>
                 </div>
                 <div th:if="${uuid64}">
-                    <p>Create a <a th:href="@{/uuids/base64#apis}">new UUID</a> using cURL in <strong>Base64</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/uuids/base64(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/uuids/base64}, name='UUID', type='Base64')"></div>
                 </div>
                 <div th:if="${uuidHashId}">
-                    <p>Create a <a th:href="@{/uuids/hashid#apis}">new UUID</a> using cURL as <strong>HashId</strong> with: </p>
-                    <pre th:text="@{curl -G -H 'Accept: text/plain' {host}/uuids/hashid(host=${HOST})}"></pre>
+                    <div th:replace="identifier :: curl (quantity=${quantity}, path=@{/uuids/hashid}, name='UUID', type='HashId')"></div>
                 </div>
             </div>
         </div>

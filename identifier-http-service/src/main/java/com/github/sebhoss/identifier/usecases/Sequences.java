@@ -26,12 +26,15 @@
  */
 package com.github.sebhoss.identifier.usecases;
 
+import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
+
 import com.codahale.metrics.annotation.Timed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -49,53 +52,68 @@ public class Sequences {
     }
 
     /**
+     * @param quantity
+     *            The number of sequences to show.
      * @return The next sequence number.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE)
-    public String sequence() {
-        return api.nextSequence();
+    public String sequence(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextSequence);
     }
 
     /**
+     * @param quantity
+     *            The number of sequences to show.
      * @return The next sequence number in Base36.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE36)
-    public String sequenceInBase36() {
-        return api.nextSequenceInBase36();
+    public String sequenceInBase36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextSequenceInBase36);
     }
 
     /**
+     * @param quantity
+     *            The number of sequences to show.
      * @return The next sequence number in Base62.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE62)
-    public String sequenceInBase62() {
-        return api.nextSequenceInBase62();
+    public String sequenceInBase62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextSequenceInBase62);
     }
 
     /**
+     * @param quantity
+     *            The number of sequences to show.
      * @return The next sequence number in Base64.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE64)
-    public String sequenceInBase64() {
-        return api.nextSequenceInBase64();
+    public String sequenceInBase64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextSequenceInBase64);
     }
 
     /**
+     * @param quantity
+     *            The number of sequences to show.
      * @return The next sequence number as HashId.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_HASHID)
-    public String sequenceAsHashId() {
-        return api.nextSequenceAsHashId();
+    public String sequenceAsHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextSequenceAsHashId);
     }
 
     /**

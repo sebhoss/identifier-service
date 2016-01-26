@@ -26,6 +26,12 @@ var copyToClipboard = (function() {
     };
 })();
 
+var markCopied = function(element) {
+    if (!element.classList.contains('copied')) {
+        element.classList.add('copied');
+    }
+};
+
 // DOMContentLoaded
 window.addEventListener('WebComponentsReady', function(e) {
     let preElements = document.querySelectorAll('pre');
@@ -40,8 +46,9 @@ window.addEventListener('WebComponentsReady', function(e) {
                 let tmp = document.createElement('div');
                 tmp.innerHTML = notice;
 
-                alert.appendChild(tmp)
                 copyToClipboard(preElement.textContent)
+                alert.appendChild(tmp)
+                markCopied(preElement);
 
                 setTimeout(function() {
                     alert.removeChild(tmp);

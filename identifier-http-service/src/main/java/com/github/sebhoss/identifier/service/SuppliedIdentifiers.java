@@ -38,14 +38,16 @@ import java.util.UUID;
 import java.util.function.LongSupplier;
 
 import com.codahale.metrics.annotation.Timed;
-import com.github.sebhoss.identifier.usecases.IndexPages;
+import com.github.sebhoss.identifier.usecases.Sequences;
+import com.github.sebhoss.identifier.usecases.Timestamps;
+import com.github.sebhoss.identifier.usecases.UUIDs;
 
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-class SuppliedIdentifiers implements IndexPages.API {
+class SuppliedIdentifiers implements Sequences.API, Timestamps.API, UUIDs.API {
 
     private final LongSupplier longSupplier;
     private final Encoder      encoder;

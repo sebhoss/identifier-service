@@ -26,12 +26,15 @@
  */
 package com.github.sebhoss.identifier.usecases;
 
+import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
+
 import com.codahale.metrics.annotation.Timed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -49,53 +52,67 @@ public class Timestamps {
     }
 
     /**
+     * @param quantity
+     *            The number of timestamps to show.
      * @return The current timestamp.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP)
-    public String timestamp() {
-        return api.nextTimestamp();
+    public String timestamp(final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextTimestamp);
     }
 
     /**
+     * @param quantity
+     *            The number of timestamps to show.
      * @return The current timestamp in Base36.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE36)
-    public String timestampInBase36() {
-        return api.nextTimestampInBase36();
+    public String timestampInBase36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextTimestampInBase36);
     }
 
     /**
+     * @param quantity
+     *            The number of timestamps to show.
      * @return The current timestamp in Base62.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE62)
-    public String timestampInBase62() {
-        return api.nextTimestampInBase62();
+    public String timestampInBase62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextTimestampInBase62);
     }
 
     /**
+     * @param quantity
+     *            The number of timestamps to show.
      * @return The current timestamp in Base64.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE64)
-    public String timestampInBase64() {
-        return api.nextTimestampInBase64();
+    public String timestampInBase64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextTimestampInBase64);
     }
 
     /**
+     * @param quantity
+     *            The number of timestamps to show.
      * @return The current timestamp as HashId.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_HASHID)
-    public String timestampAsHashId() {
-        return api.nextTimestampAsHashId();
+    public String timestampAsHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextTimestampAsHashId);
     }
 
     /**

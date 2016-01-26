@@ -1,0 +1,51 @@
+<dom-module id="id-multiplier">
+
+    <template>
+        <input type="number"
+               min="1" 
+               autocomplete="on"
+               value="{{value::input}}"
+               on-change="adaptIdentifierNumber">
+        </input>
+    </template>
+
+    <script>
+        "use strict";
+        HTMLImports.whenReady(function () {
+
+            Polymer({
+                is: 'id-multiplier',
+
+                properties: {
+                    path: String,
+                    value:  String
+                },
+
+                adaptIdentifierNumber: function() {
+                    var url = window.location.href
+                    var newAdditionalURL = "";
+                    var tempArray = url.split("?");
+                    var baseURL = tempArray[0].split("#")[0];
+                    var aditionalURL = tempArray[1]; 
+                    var temp = "";
+                    if (aditionalURL) {
+                        var parameters = aditionalURL.split("#")[0];
+                        var tempArray = parameters.split("&");
+                        for (var i in tempArray) {
+                            if (tempArray[i].indexOf("quantity") == -1) {
+                                newAdditionalURL += temp + tempArray[i];
+                                temp = "&";
+                            }
+                        }
+                    }
+                    var params = temp + "quantity=" + this.value + "#identifiers";
+                    var finalURL = baseURL + "?" + newAdditionalURL + params;
+                    window.location.href = finalURL;
+                }
+
+              });
+
+        });
+    </script>
+
+</dom-module>

@@ -8,7 +8,7 @@
         </style>
         <div class="identifier-container">
             <div class="identifier-block">
-                <pre><strong>[[value]]</strong></pre>
+                <pre id="id"><strong>[[value]]</strong></pre>
                 <span class="refresh" on-click="refresh">
                     <img src="/images/refresh.svg" width="20px" height="20px"></img>
                 </span>
@@ -45,6 +45,7 @@
                         if (httpRequest.readyState == XMLHttpRequest.DONE ) {
                             if (httpRequest.status == 200) {
                                 this.value = httpRequest.responseText;
+                                this.$.id.classList.remove('copied');
                             }
                          }
                       }.bind(this));

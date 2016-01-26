@@ -31,7 +31,7 @@ public class ThymeleafCustomizer {
     }
 
     @PostConstruct
-    void onApplicationEvent() {
+    void afterConstruction() {
         viewResolver.addStaticVariable("HOST", properties.getUrl()); //$NON-NLS-1$
     }
 

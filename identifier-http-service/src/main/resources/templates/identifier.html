@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<body>
+
+  <div th:fragment="id (quantity, path, name, type)">
+    <p>
+      Here <span th:if="${quantity > 1}">are</span><span th:unless="${quantity > 1}">is a</span>
+      <span th:text="${quantity}"></span>
+      <a th:href="${path} + '#identifiers'">
+        new
+        <span th:if="${quantity > 1}" th:text="${name} + 's'"></span><span th:unless="${quantity > 1}" th:text="${name}"></span>
+      </a> for you in 
+      <strong th:text="${type}"></strong>:
+    </p>
+    <id-value th:each="i : ${#numbers.sequence(1,#objects.nullSafe(quantity,1))}" th:attr="path=${path}"></id-value>
+  </div>
+
+  <div th:fragment="curl (quantity, path, name, type)">
+    <p>Create a <a th:href="${path} + '#apis'" th:text="'new ' + ${name}"></a> using cURL in <strong th:text="${type}"></strong> with: </p>
+    <pre th:if="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}?quantity={quantity}(host=${HOST},path=${path},quantity=${quantity})}"></pre>
+    <pre th:unless="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}(host=${HOST},path=${path})}"></pre>
+  </div>
+
+</body>
+</html>

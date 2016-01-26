@@ -26,6 +26,9 @@
  */
 package com.github.sebhoss.identifier.usecases;
 
+import java.util.Arrays;
+import java.util.function.Consumer;
+
 import com.codahale.metrics.annotation.Timed;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Identifiers can be retrieved as HTML.
@@ -59,10 +63,10 @@ public class IndexPages {
     @Timed
     @RequestMapping(HttpApi.ROOT)
     public String root(final Model model) {
-        showAllSequences(model);
-        enrichTimestamps(model);
-        enrichUuids(model);
-        return "index";
+        return index(model,
+                api::showAllSequences,
+                api::showAllTimestamps,
+                api::showAllUuids);
     }
 
     /**
@@ -74,123 +78,104 @@ public class IndexPages {
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCES)
-    @SuppressWarnings("static-method")
     public String sequences(final Model model) {
-        showAllSequences(model);
-        return "index";
+        return index(model,
+                api::showAllSequences);
     }
 
     /**
      * Shows the sequence page which only shows sequence identifiers.
      *
+     * @param quantity
+     *            The number of sequences to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE)
-    @SuppressWarnings("static-method")
-    public String sequence(final Model model) {
-        showSequences(model);
-        showSequence(model);
-        return "index";
+    public String sequence(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showSequences,
+                api::showSequence);
     }
 
     /**
      * Shows the sequence page which only shows sequence identifiers in Base36.
      *
+     * @param quantity
+     *            The number of sequences to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE36)
-    @SuppressWarnings("static-method")
-    public String sequence36(final Model model) {
-        showSequences(model);
-        showSequenceInBase36(model);
-        return "index";
+    public String sequence36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showSequences,
+                api::showSequenceInBase36);
     }
 
     /**
      * Shows the sequence page which only shows sequence identifiers in Base62.
      *
+     * @param quantity
+     *            The number of sequences to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE62)
-    @SuppressWarnings("static-method")
-    public String sequence62(final Model model) {
-        showSequences(model);
-        showSequenceInBase62(model);
-        return "index";
+    public String sequence62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showSequences,
+                api::showSequenceInBase62);
     }
 
     /**
      * Shows the sequence page which only shows sequence identifiers in Base64.
      *
+     * @param quantity
+     *            The number of sequences to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_BASE64)
-    @SuppressWarnings("static-method")
-    public String sequence64(final Model model) {
-        showSequences(model);
-        showSequenceInBase64(model);
-        return "index";
+    public String sequence64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showSequences,
+                api::showSequenceInBase64);
     }
 
     /**
      * Shows the sequence page which only shows sequence identifiers as HashId.
      *
+     * @param quantity
+     *            The number of sequences to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.SEQUENCE_HASHID)
-    @SuppressWarnings("static-method")
-    public String sequenceHashId(final Model model) {
-        showSequences(model);
-        showSequenceAsHashId(model);
-        return "index";
-    }
-
-    private static void showAllSequences(final Model model) {
-        showSequences(model);
-        showSequence(model);
-        showSequenceInBase36(model);
-        showSequenceInBase62(model);
-        showSequenceInBase64(model);
-        showSequenceAsHashId(model);
-    }
-
-    private static void showSequences(final Model model) {
-        model.addAttribute("sequences", Boolean.TRUE);
-    }
-
-    private static void showSequence(final Model model) {
-        model.addAttribute("sequence", Boolean.TRUE);
-    }
-
-    private static void showSequenceInBase36(final Model model) {
-        model.addAttribute("sequence36", Boolean.TRUE);
-    }
-
-    private static void showSequenceInBase62(final Model model) {
-        model.addAttribute("sequence62", Boolean.TRUE);
-    }
-
-    private static void showSequenceInBase64(final Model model) {
-        model.addAttribute("sequence64", Boolean.TRUE);
-    }
-
-    private static void showSequenceAsHashId(final Model model) {
-        model.addAttribute("sequenceHashId", Boolean.TRUE);
+    public String sequenceHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showSequences,
+                api::showSequenceAsHashId);
     }
 
     /**
@@ -203,116 +188,103 @@ public class IndexPages {
     @Timed
     @RequestMapping(HttpApi.TIMESTAMPS)
     public String timestamps(final Model model) {
-        enrichTimestamps(model);
-        return "index";
+        return index(model,
+                api::showAllTimestamps);
     }
 
     /**
      * Shows the timestamp page which only shows timestamp identifiers.
      *
+     * @param quantity
+     *            The number of timestamps to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.TIMESTAMP)
-    public String timestamp(final Model model) {
-        showTimestamps(model);
-        showTimestamp(model);
-        return "index";
+    public String timestamp(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showTimestamps,
+                api::showTimestamp);
     }
 
     /**
      * Shows the timestamp page which only shows timestamp identifiers in Base36.
      *
+     * @param quantity
+     *            The number of timestamps to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.TIMESTAMP_BASE36)
-    public String timestamp36(final Model model) {
-        showTimestamps(model);
-        showTimestampInBase36(model);
-        return "index";
+    public String timestamp36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showTimestamps,
+                api::showTimestampInBase36);
     }
 
     /**
      * Shows the timestamp page which only shows timestamp identifiers in Base62.
      *
+     * @param quantity
+     *            The number of timestamps to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.TIMESTAMP_BASE62)
-    public String timestamp62(final Model model) {
-        showTimestamps(model);
-        showTimestampInBase62(model);
-        return "index";
+    public String timestamp62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showTimestamps,
+                api::showTimestampInBase62);
     }
 
     /**
      * Shows the timestamp page which only shows timestamp identifiers in Base64.
      *
+     * @param quantity
+     *            The number of timestamps to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.TIMESTAMP_BASE64)
-    public String timestamp64(final Model model) {
-        showTimestamps(model);
-        showTimestampInBase64(model);
-        return "index";
+    public String timestamp64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showTimestamps,
+                api::showTimestampInBase64);
     }
 
     /**
      * Shows the timestamp page which only shows timestamp identifiers as HashId.
      *
+     * @param quantity
+     *            The number of timestamps to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.TIMESTAMP_HASHID)
-    public String timestampHashId(final Model model) {
-        showTimestamps(model);
-        showTimestampAsHashId(model);
-        return "index";
-    }
-
-    private void enrichTimestamps(final Model model) {
-        showTimestamps(model);
-        showTimestamp(model);
-        showTimestampInBase36(model);
-        showTimestampInBase62(model);
-        showTimestampInBase64(model);
-        showTimestampAsHashId(model);
-    }
-
-    private static void showTimestamps(final Model model) {
-        model.addAttribute("timestamps", Boolean.TRUE);
-    }
-
-    private void showTimestamp(final Model model) {
-        model.addAttribute("timestamp", api.nextTimestamp());
-    }
-
-    private void showTimestampInBase36(final Model model) {
-        model.addAttribute("timestamp36", api.nextTimestampInBase36());
-    }
-
-    private void showTimestampInBase62(final Model model) {
-        model.addAttribute("timestamp62", api.nextTimestampInBase62());
-    }
-
-    private void showTimestampInBase64(final Model model) {
-        model.addAttribute("timestamp64", api.nextTimestampInBase64());
-    }
-
-    private void showTimestampAsHashId(final Model model) {
-        model.addAttribute("timestampHashId", api.nextTimestampAsHashId());
+    public String timestampHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showTimestamps,
+                api::showTimestampAsHashId);
     }
 
     /**
@@ -325,124 +297,247 @@ public class IndexPages {
     @Timed
     @RequestMapping(HttpApi.UUIDS)
     public String uuids(final Model model) {
-        enrichUuids(model);
-        return "index";
+        return index(model,
+                api::showAllUuids);
     }
 
     /**
      * Shows the UUID page which only shows UUID identifiers.
      *
+     * @param quantity
+     *            The number of UUIDs to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.UUID)
-    public String uuid(final Model model) {
-        showUuids(model);
-        showUuid(model);
-        return "index";
+    public String uuid(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showUuids,
+                api::showUuid);
     }
 
     /**
      * Shows the UUID page which only shows UUID identifiers in Base36.
      *
+     * @param quantity
+     *            The number of UUIDs to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.UUID_BASE36)
-    public String uuid36(final Model model) {
-        showUuids(model);
-        showUuidInBase36(model);
-        return "index";
+    public String uuid36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showUuids,
+                api::showUuidInBase36);
     }
 
     /**
      * Shows the UUID page which only shows UUID identifiers in Base62.
      *
+     * @param quantity
+     *            The number of UUIDs to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.UUID_BASE62)
-    public String uuid62(final Model model) {
-        showUuids(model);
-        showUuidInBase62(model);
-        return "index";
+    public String uuid62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showUuids,
+                api::showUuidInBase62);
     }
 
     /**
      * Shows the UUID page which only shows UUID identifiers in Base64.
      *
+     * @param quantity
+     *            The number of UUIDs to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.UUID_BASE64)
-    public String uuid64(final Model model) {
-        showUuids(model);
-        showUuidInBase64(model);
-        return "index";
+    public String uuid64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showUuids,
+                api::showUuidInBase64);
     }
 
     /**
      * Shows the UUID page which only shows UUID identifiers as HashId.
      *
+     * @param quantity
+     *            The number of UUIDs to show.
      * @param model
      *            The view model.
      * @return The name of the view to show.
      */
     @Timed
     @RequestMapping(HttpApi.UUID_HASHID)
-    public String uuidHashId(final Model model) {
-        showUuids(model);
-        showUuidAsHashId(model);
-        return "index";
+    public String uuidHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") Integer quantity,
+            final Model model) {
+        return index(model, quantity,
+                api::showUuids,
+                api::showUuidAsHashId);
     }
 
-    private void enrichUuids(final Model model) {
-        showUuids(model);
-        showUuid(model);
-        showUuidInBase36(model);
-        showUuidInBase62(model);
-        showUuidInBase64(model);
-        showUuidAsHashId(model);
+    @SafeVarargs
+    private static String index(final Model model, final Consumer<Model>... consumers) {
+        return index(model, null, consumers);
     }
 
-    private static void showUuids(final Model model) {
-        model.addAttribute("uuids", Boolean.TRUE);
-    }
-
-    private void showUuid(final Model model) {
-        model.addAttribute("uuid", api.nextUuid());
-    }
-
-    private void showUuidInBase36(final Model model) {
-        model.addAttribute("uuid36", api.nextUuidInBase36());
-    }
-
-    private void showUuidInBase62(final Model model) {
-        model.addAttribute("uuid62", api.nextUuidInBase62());
-    }
-
-    private void showUuidInBase64(final Model model) {
-        model.addAttribute("uuid64", api.nextUuidInBase64());
-    }
-
-    private void showUuidAsHashId(final Model model) {
-        model.addAttribute("uuidHashId", api.nextUuidAsHashId());
+    @SafeVarargs
+    private static String index(final Model model, final Integer quantity, final Consumer<Model>... consumers) {
+        Arrays.stream(consumers).forEach(consumer -> consumer.accept(model));
+        model.addAttribute("quantity", quantity);
+        return "index"; // delegates to the 'index' template
     }
 
     /**
      * The required internal API for the index page.
      */
-    public static interface API extends Sequences.API, Timestamps.API, UUIDs.API {
+    public static interface API {
 
-        // see super-interfaces
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showAllSequences(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequences(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequence(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequenceInBase36(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequenceInBase62(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequenceInBase64(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showSequenceAsHashId(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showAllTimestamps(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestamps(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestamp(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestampInBase36(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestampInBase62(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestampInBase64(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showTimestampAsHashId(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showAllUuids(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuids(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuid(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuidInBase36(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuidInBase62(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuidInBase64(Model model);
+
+        /**
+         * @param model
+         *            The model to adapt.
+         */
+        void showUuidAsHashId(Model model);
 
     }
 

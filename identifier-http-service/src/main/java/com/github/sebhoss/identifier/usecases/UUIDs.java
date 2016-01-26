@@ -26,12 +26,15 @@
  */
 package com.github.sebhoss.identifier.usecases;
 
+import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
+
 import com.codahale.metrics.annotation.Timed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -49,53 +52,67 @@ public class UUIDs {
     }
 
     /**
+     * @param quantity
+     *            The number of UUIDs to show.
      * @return The next UUID.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.UUID)
-    public String uuid() {
-        return api.nextUuid();
+    public String uuid(final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextUuid);
     }
 
     /**
+     * @param quantity
+     *            The number of UUIDs to show.
      * @return The next UUID in Base36.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE36)
-    public String uuidInBase36() {
-        return api.nextUuidInBase36();
+    public String uuidInBase36(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextUuidInBase36);
     }
 
     /**
+     * @param quantity
+     *            The number of UUIDs to show.
      * @return The next UUID in Base62.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE62)
-    public String uuidInBase62() {
-        return api.nextUuidInBase62();
+    public String uuidInBase62(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextUuidInBase62);
     }
 
     /**
+     * @param quantity
+     *            The number of UUIDs to show.
      * @return The next UUID in Base64.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE64)
-    public String uuidInBase64() {
-        return api.nextUuidInBase64();
+    public String uuidInBase64(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextUuidInBase64);
     }
 
     /**
+     * @param quantity
+     *            The number of UUIDs to show.
      * @return The next UUID as HashId.
      */
     @Timed
     @ResponseBody
     @RequestMapping(HttpApi.UUID_HASHID)
-    public String uuidAsHashId() {
-        return api.nextUuidAsHashId();
+    public String uuidAsHashId(
+            final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
+        return multiple(quantity, api::nextUuidAsHashId);
     }
 
     /**
