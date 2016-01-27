@@ -46,8 +46,8 @@ window.addEventListener('WebComponentsReady', function(e) {
                 let tmp = document.createElement('div');
                 tmp.innerHTML = notice;
 
-                copyToClipboard(preElement.textContent)
-                alert.appendChild(tmp)
+                copyToClipboard(preElement.textContent);
+                alert.appendChild(tmp);
                 markCopied(preElement);
 
                 setTimeout(function() {

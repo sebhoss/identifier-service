@@ -136,10 +136,13 @@ body > h1 {
 .header input {
   width: 70px;
   text-align:right;
-  margin-right: 20px;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 15px;
   font-size: 0.5em;
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
 }
 
 .copied {
@@ -150,4 +153,20 @@ body > h1 {
 @keyframes copy {
     0% { background-color: white; }
     100% { background-color: #e3f7fc; }
+}
+
+.octicon {
+  color: white;
+}
+.octicon-dash {
+  margin-left: 20px;
+}
+.octicon-plus {
+  margin-right: 20px;
+}
+.octicon-dash:hover {
+  background-color: red;
+}
+.octicon-plus:hover {
+  background-color: green;
 }

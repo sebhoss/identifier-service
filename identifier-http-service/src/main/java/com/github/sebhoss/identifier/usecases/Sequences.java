@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Sequence based identifiers can be retrieved over HTTP as 'text/plain'.
  */
 @Controller
+@ResponseBody
 @RequestMapping(produces = "text/plain", method = RequestMethod.GET)
 public class Sequences {
 
@@ -57,7 +58,6 @@ public class Sequences {
      * @return The next sequence number.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE)
     public String sequence(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -70,7 +70,6 @@ public class Sequences {
      * @return The next sequence number in Base36.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE36)
     public String sequenceInBase36(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -83,7 +82,6 @@ public class Sequences {
      * @return The next sequence number in Base62.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE62)
     public String sequenceInBase62(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -96,7 +94,6 @@ public class Sequences {
      * @return The next sequence number in Base64.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_BASE64)
     public String sequenceInBase64(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -109,7 +106,6 @@ public class Sequences {
      * @return The next sequence number as HashId.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.SEQUENCE_HASHID)
     public String sequenceAsHashId(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {

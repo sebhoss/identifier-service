@@ -101,4 +101,9 @@ final class HttpApi {
      */
     public static final String UUID_HASHID = UUIDS + "/hashid";
 
+    /**
+     * The <code>SLACK</code> endpoints answers to Slack commands.
+     */
+    public static final String SLACK = "/slack";
+
 }

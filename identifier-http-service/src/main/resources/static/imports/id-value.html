@@ -29,7 +29,7 @@
                 },
 
                 attached: function() {
-                    if (!this.value) {
+                    if (!this.value && this.path) {
                         this.refresh();
                     }
                 },

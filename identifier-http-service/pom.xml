@@ -76,6 +76,11 @@
     <artifactId>polymer</artifactId>
     <version>1.0.8</version>
 </dependency>
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>octicons</artifactId>
+    <version>3.4.1</version>
+</dependency>
 
         <!-- Spring -->
          <dependency>

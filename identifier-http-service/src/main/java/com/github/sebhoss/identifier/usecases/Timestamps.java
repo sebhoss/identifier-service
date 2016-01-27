@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Timestamp based identifiers can be retrieved over HTTP as 'text/plain'.
  */
 @Controller
+@ResponseBody
 @RequestMapping(produces = "text/plain", method = RequestMethod.GET)
 public class Timestamps {
 
@@ -57,7 +58,6 @@ public class Timestamps {
      * @return The current timestamp.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP)
     public String timestamp(final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
         return multiple(quantity, api::nextTimestamp);
@@ -69,7 +69,6 @@ public class Timestamps {
      * @return The current timestamp in Base36.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE36)
     public String timestampInBase36(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -82,7 +81,6 @@ public class Timestamps {
      * @return The current timestamp in Base62.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE62)
     public String timestampInBase62(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -95,7 +93,6 @@ public class Timestamps {
      * @return The current timestamp in Base64.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_BASE64)
     public String timestampInBase64(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -108,7 +105,6 @@ public class Timestamps {
      * @return The current timestamp as HashId.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.TIMESTAMP_HASHID)
     public String timestampAsHashId(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {

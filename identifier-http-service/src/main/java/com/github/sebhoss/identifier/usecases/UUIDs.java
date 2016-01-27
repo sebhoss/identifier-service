@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * UUID based identifiers can be retrieved over HTTP as 'text/plain'.
  */
 @Controller
+@ResponseBody
 @RequestMapping(produces = "text/plain", method = RequestMethod.GET)
 public class UUIDs {
 
@@ -57,7 +58,6 @@ public class UUIDs {
      * @return The next UUID.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.UUID)
     public String uuid(final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
         return multiple(quantity, api::nextUuid);
@@ -69,7 +69,6 @@ public class UUIDs {
      * @return The next UUID in Base36.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE36)
     public String uuidInBase36(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -82,7 +81,6 @@ public class UUIDs {
      * @return The next UUID in Base62.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE62)
     public String uuidInBase62(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -95,7 +93,6 @@ public class UUIDs {
      * @return The next UUID in Base64.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.UUID_BASE64)
     public String uuidInBase64(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
@@ -108,7 +105,6 @@ public class UUIDs {
      * @return The next UUID as HashId.
      */
     @Timed
-    @ResponseBody
     @RequestMapping(HttpApi.UUID_HASHID)
     public String uuidAsHashId(
             final @RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity) {
