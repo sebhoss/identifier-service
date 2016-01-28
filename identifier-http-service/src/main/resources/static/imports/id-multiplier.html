@@ -8,7 +8,7 @@
                min="1" 
                autocomplete="on"
                value="{{value::input}}"
-               on-change="adaptIdentifierNumber">
+               on-change="redirectWithNewQuantity">
         </input>
         <span class="plus">
             <span class="octicon octicon-plus" on-click="increment"></span>
@@ -76,6 +76,28 @@
                     var params = temp + "quantity=" + this.value + "#identifiers";
                     var finalURL = baseURL + "?" + newAdditionalURL + params;
                     window.history.pushState({"quantity": this.value}, "ID Service", finalURL);
+                },
+
+                redirectWithNewQuantity: function() {
+                    var url = window.location.href;
+                    var newAdditionalURL = "";
+                    var tempArray = url.split("?");
+                    var baseURL = tempArray[0].split("#")[0];
+                    var aditionalURL = tempArray[1]; 
+                    var temp = "";
+                    if (aditionalURL) {
+                        var parameters = aditionalURL.split("#")[0];
+                        var tempArray = parameters.split("&");
+                        for (var i in tempArray) {
+                            if (tempArray[i].indexOf("quantity") == -1) {
+                                newAdditionalURL += temp + tempArray[i];
+                                temp = "&";
+                            }
+                        }
+                    }
+                    var params = temp + "quantity=" + this.value + "#identifiers";
+                    var finalURL = baseURL + "?" + newAdditionalURL + params;
+                    window.location.href = finalURL;
                 }
 
               });
