@@ -31,7 +31,7 @@ public class SlackCommands {
         suppliers.put("/timestamp", api::nextTimestamp);
         suppliers.put("/timestamp-in-base36", api::nextTimestampInBase36);
         suppliers.put("/timestamp-in-base62", api::nextTimestampInBase62);
-        suppliers.put("/timestamp-in-base4", api::nextTimestampInBase64);
+        suppliers.put("/timestamp-in-base64", api::nextTimestampInBase64);
         suppliers.put("/timestamp-as-hashid", api::nextTimestampAsHashId);
         suppliers.put("/uuid", api::nextUuid);
         suppliers.put("/uuid-in-base36", api::nextUuidInBase36);
