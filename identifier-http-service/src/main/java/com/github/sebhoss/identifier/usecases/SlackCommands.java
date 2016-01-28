@@ -52,7 +52,10 @@ public class SlackCommands {
     @RequestMapping(path = HttpApi.SLACK)
     public String customCommands(final SlackCommand command) {
         try {
-            final int quantity = Integer.parseInt(command.getText());
+            int quantity = Integer.parseInt(command.getText());
+            if (quantity < 1) {
+                quantity = 1;
+            }
             return Multiplier.multiple(quantity, suppliers.get(command.getCommand()));
         } catch (final NumberFormatException exception) {
             return "That's not a number " + command.getUser_name() + "!";
