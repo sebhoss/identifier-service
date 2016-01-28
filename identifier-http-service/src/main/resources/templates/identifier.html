@@ -18,8 +18,8 @@
 
   <div th:fragment="curl (quantity, path, name, type)">
     <p>Create a <a th:href="${path} + '#apis'" th:text="'new ' + ${name}"></a> using cURL in <strong th:text="${type}"></strong> with: </p>
-    <pre th:if="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}?quantity={quantity}(host=${HOST},path=${path},quantity=${quantity})}"></pre>
-    <pre th:unless="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}(host=${HOST},path=${path})}"></pre>
+    <pre class="clipboard" th:if="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}?quantity={quantity}(host=${HOST},path=${path},quantity=${quantity})}"></pre>
+    <pre class="clipboard" th:unless="${quantity}" th:text="@{curl -G -H 'Accept: text/plain' {host}{path}(host=${HOST},path=${path})}"></pre>
   </div>
 
 </body>

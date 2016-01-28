@@ -8,7 +8,7 @@
         </style>
         <div class="identifier-container">
             <div class="identifier-block">
-                <pre id="id"><strong>[[value]]</strong></pre>
+                <pre id="id" on-click="copyToClipboard"><strong>[[value]]</strong></pre>
                 <span class="refresh" on-click="refresh">
                     <img src="/images/refresh.svg" width="20px" height="20px"></img>
                 </span>
@@ -18,6 +18,27 @@
 
     <script>
         "use strict";
+
+        var clipboard = (function() {
+            var _dataString = null;
+
+            document.addEventListener("copy", function(e) {
+                if (_dataString !== null) {
+                    try {
+                        e.clipboardData.setData("text/plain", _dataString);
+                        e.preventDefault();
+                    } finally {
+                        _dataString = null;
+                    }
+                }
+            });
+
+            return function(data) {
+                _dataString = data;
+                document.execCommand("copy");
+            };
+        })();
+
         HTMLImports.whenReady(function () {
 
             Polymer({
@@ -32,6 +53,25 @@
                     if (!this.value && this.path) {
                         this.refresh();
                     }
+                },
+
+                copyToClipboard: function() {
+                    var value = this.$.id.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                    var alert = document.querySelector('#alert-container');
+                    var notice1 = '<div class="alert-box notice">';
+                    var notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
+                    var notice3 = '</div>';
+                    var notice = notice1 + notice2 + '<span>' + this.value + '</span>' + notice3;
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = notice;
+
+                    clipboard(this.$.id.textContent);
+                    alert.appendChild(tmp);
+                    this.$.id.classList.add('copied');
+
+                    setTimeout(function() {
+                        alert.removeChild(tmp);
+                    }, (1000));
                 },
 
                 refresh: function() {

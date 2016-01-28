@@ -33,8 +33,8 @@ var markCopied = function(element) {
 };
 
 // DOMContentLoaded
-window.addEventListener('WebComponentsReady', function(e) {
-    let preElements = document.querySelectorAll('pre');
+window.addEventListener('DOMContentLoaded', function(e) {
+    let preElements = document.querySelectorAll('.clipboard');
 
     for (let index in preElements) {
         let preElement = preElements[index];
