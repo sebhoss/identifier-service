@@ -3,11 +3,10 @@
 
   <div th:fragment="id (quantity, path, name, type)">
     <p>
-      Here <span th:if="${quantity > 1}">are</span><span th:unless="${quantity > 1}">is a</span>
-      <span th:text="${quantity}"></span>
+      Here are
       <a th:href="${path} + '#identifiers'">
         new
-        <span th:if="${quantity > 1}" th:text="${name} + 's'"></span><span th:unless="${quantity > 1}" th:text="${name}"></span>
+        <span th:text="${name} + 's'"></span>
       </a> for you in 
       <strong th:text="${type}"></strong>:
     </p>
