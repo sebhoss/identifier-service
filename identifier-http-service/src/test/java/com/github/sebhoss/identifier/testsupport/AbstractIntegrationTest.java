@@ -42,9 +42,9 @@ import org.springframework.web.client.RestTemplate;
  * Abstract integration test that sets up a Spring context of the entire application + ways to access the identifier
  * service.
  */
+@WebIntegrationTest(randomPort = true)
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IdentifierApplication.class)
-@WebIntegrationTest(randomPort = true)
 public abstract class AbstractIntegrationTest {
 
     @Value("${local.server.port}")

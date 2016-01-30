@@ -44,45 +44,57 @@ public class UUIDsTest extends AbstractMockMvcTest<UUIDs, UUIDs.API> {
     }
 
     /**
-     * Ensures that an UUID can be retrieved from <code>/uuid</code>.
+     * Ensures that an UUID can be retrieved from <code>/uuids/uuid</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetUuid() throws Exception {
+        // given
         expectedResult = "0930b880-c13a-11e5-a837-0800200c9a66";
+
+        // when
         supplier = api::nextUuid;
 
+        // then
         requestAndVerify("/uuid");
     }
 
     /**
-     * Ensures that an UUID in Base36 can be retrieved from <code>/uuid/base36</code>.
+     * Ensures that an UUID in Base36 can be retrieved from <code>/uuids/base36</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetUuidInBase36() throws Exception {
+        // given
         expectedResult = "9xyplmzaulvyb16rmz32qg1rw=";
+
+        // when
         supplier = api::nextUuidInBase36;
 
-        requestAndVerify("/uuid/base36");
+        // then
+        requestAndVerify("/uuids/base36");
     }
 
     /**
-     * Ensures that an UUID in Base36 can be retrieved from <code>/uuid/base64</code>.
+     * Ensures that an UUID in Base36 can be retrieved from <code>/uuids/base64</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetUuidInBase64() throws Exception {
+        // given
         expectedResult = "Y2UyNGI3OTM2OTFlNDViZjhmN2RhOTU3ZWZjNzNlNTU=";
+
+        // when
         supplier = api::nextUuidInBase64;
 
-        requestAndVerify("/uuid/base64");
+        // then
+        requestAndVerify("/uuids/base64");
     }
 
 }

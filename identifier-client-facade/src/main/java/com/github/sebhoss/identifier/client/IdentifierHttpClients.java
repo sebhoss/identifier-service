@@ -41,8 +41,8 @@ public final class IdentifierHttpClients {
     /**
      * @return A new client facade using the default options
      */
-    public static IdentifierHttpClient client() {
-        return client("https://id.xn--ho-hia.de/"); //$NON-NLS-1$
+    public static IdentifierHttpClient http() {
+        return http("https://id.xn--ho-hia.de/"); //$NON-NLS-1$
     }
 
     /**
@@ -51,8 +51,8 @@ public final class IdentifierHttpClients {
      *            is required to end in a "/"
      * @return A new client facade which talks to the given baseUrl
      */
-    public static IdentifierHttpClient client(final String baseUrl) {
-        return client(new OkHttpClient(), baseUrl);
+    public static IdentifierHttpClient http(final String baseUrl) {
+        return http(new OkHttpClient(), baseUrl);
     }
 
     /**
@@ -63,7 +63,7 @@ public final class IdentifierHttpClients {
      *            is required to end in a "/"
      * @return A new client facade which talks to the given baseUrl using the given HTTP client
      */
-    public static IdentifierHttpClient client(final OkHttpClient client, final String baseUrl) {
+    public static IdentifierHttpClient http(final OkHttpClient client, final String baseUrl) {
         return new OkHttpIdentifierHttpClient(client, baseUrl);
     }
 

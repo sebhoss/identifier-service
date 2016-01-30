@@ -44,45 +44,93 @@ public class SequencesTest extends AbstractMockMvcTest<Sequences, Sequences.API>
     }
 
     /**
-     * Ensures that a sequence number can be retrieved from <code>/sequence</code>.
+     * Ensures that a sequence number can be retrieved from <code>/sequences/sequence</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequence() throws Exception {
+        // given
         expectedResult = "12345";
+
+        // when
         supplier = api::nextSequence;
 
-        requestAndVerify("/sequence");
+        // then
+        requestAndVerify("/sequences/sequence");
     }
 
     /**
-     * Ensures that a sequence number in Base36 can be retrieved from <code>/sequence/base36</code>.
+     * Ensures that a sequence number in Base36 can be retrieved from <code>/sequences/base36</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequenceInBase36() throws Exception {
+        // given
         expectedResult = "9ix";
+
+        // when
         supplier = api::nextSequenceInBase36;
 
-        requestAndVerify("/sequence/base36");
+        // then
+        requestAndVerify("/sequences/base36");
     }
 
     /**
-     * Ensures that a sequence number in Base64 can be retrieved from <code>/sequence/base64</code>.
+     * Ensures that a sequence number in Base62 can be retrieved from <code>/sequences/base62</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
+    @Test
+    public void shouldGetSequenceInBase62() throws Exception {
+        // given
+        expectedResult = "zt";
+
+        // when
+        supplier = api::nextSequenceInBase62;
+
+        // then
+        requestAndVerify("/sequences/base62");
+    }
+
+    /**
+     * Ensures that a sequence number in Base64 can be retrieved from <code>/sequences/base64</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequenceInBase64() throws Exception {
-        expectedResult = "MTIzNDU=";
+        // given
+        expectedResult = "MTIzNDU";
+
+        // when
         supplier = api::nextSequenceInBase64;
 
-        requestAndVerify("/sequence/base64");
+        // then
+        requestAndVerify("/sequences/base64");
+    }
+
+    /**
+     * Ensures that a sequence number as HashId can be retrieved from <code>/sequences/hashid</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
+    @Test
+    public void shouldGetSequenceAsHashId() throws Exception {
+        // given
+        expectedResult = "4mR";
+
+        // when
+        supplier = api::nextSequenceAsHashId;
+
+        // then
+        requestAndVerify("/sequences/hashid");
     }
 
 }

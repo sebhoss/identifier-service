@@ -46,9 +46,7 @@
 
   <modules>
     <module>identifier-http-service</module>
-    <!-- 
     <module>identifier-client-facade</module>
-     -->
   </modules>
 
   <properties>

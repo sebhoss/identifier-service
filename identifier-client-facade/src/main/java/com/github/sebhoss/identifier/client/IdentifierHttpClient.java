@@ -27,20 +27,84 @@
 package com.github.sebhoss.identifier.client;
 
 /**
- * Facade for the ID HTTP service. Can be used by clients who don't want to think about HTTP and/or where the remote is located
+ * Facade for the ID HTTP service. Can be used by clients who don't want to think about HTTP and/or where the remote is
+ * located
  */
 public interface IdentifierHttpClient {
 
+    /**
+     * @return The next sequence number.
+     */
     String getNextSequence();
+
+    /**
+     * @return The next sequence number in Base36.
+     */
     String getNextSequenceInBase36();
+
+    /**
+     * @return The next sequence number in Base62.
+     */
+    String getNextSequenceInBase62();
+
+    /**
+     * @return The next sequence number in Base64.
+     */
     String getNextSequenceInBase64();
 
+    /**
+     * @return The next sequence number as HashId.
+     */
+    String getNextSequenceAsHashId();
+
+    /**
+     * @return The next timestamp.
+     */
+    String getNextTimestamp();
+
+    /**
+     * @return The next timestamp in Base36.
+     */
+    String getNextTimestampInBase36();
+
+    /**
+     * @return The next timestamp in Base62.
+     */
+    String getNextTimestampInBase62();
+
+    /**
+     * @return The next timestamp in Base64.
+     */
+    String getNextTimestampInBase64();
+
+    /**
+     * @return The next timestamp as HashId.
+     */
+    String getNextTimestampAsHashId();
+
+    /**
+     * @return The next UUID.
+     */
     String getNextUuid();
+
+    /**
+     * @return The next UUID in Base36.
+     */
     String getNextUuidInBase36();
+
+    /**
+     * @return The next UUID in Base62.
+     */
+    String getNextUuidInBase62();
+
+    /**
+     * @return The next UUID in Base64.
+     */
     String getNextUuidInBase64();
 
-    String getNextTimestamp();
-    String getNextTimestampInBase36();
-    String getNextTimestampInBase64();
+    /**
+     * @return The next UUID as HashId.
+     */
+    String getNextUuidAsHashId();
 
 }

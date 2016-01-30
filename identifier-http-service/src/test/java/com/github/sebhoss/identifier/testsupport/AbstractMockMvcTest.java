@@ -55,9 +55,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  * @param <API>
  *            The type of the controller's API to use.
  */
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MockServletContext.class)
-@WebAppConfiguration
 public abstract class AbstractMockMvcTest<CONTROLLER, API> {
 
     protected String           expectedResult;
@@ -95,6 +95,10 @@ public abstract class AbstractMockMvcTest<CONTROLLER, API> {
 
     protected final ResultActions text(final String path) throws Exception {
         return mvc.perform(MockMvcRequestBuilders.get(path).accept(MediaType.TEXT_PLAIN));
+    }
+
+    protected final void verifyHtml(final String path) throws Exception {
+        html(path).andExpect(status().isOk());
     }
 
     protected final ResultActions html(final String path) throws Exception {

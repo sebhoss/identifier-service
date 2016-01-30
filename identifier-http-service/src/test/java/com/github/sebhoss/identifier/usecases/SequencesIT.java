@@ -41,39 +41,63 @@ import org.springframework.http.ResponseEntity;
 public class SequencesIT extends AbstractIntegrationTest {
 
     /**
-     * Ensures that a sequence number can be retrieved from <code>/sequence</code>.
+     * Ensures that a sequence number can be retrieved from <code>/sequences/sequence</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequence() throws Exception {
-        final ResponseEntity<String> response = fetchString("/sequence");
+        final ResponseEntity<String> response = fetchString("/sequences/sequence");
         assertThat(response.getBody(), equalTo("0"));
     }
 
     /**
-     * Ensures that a sequence number in Base36 can be retrieved from <code>/sequence/base36</code>.
+     * Ensures that a sequence number in Base36 can be retrieved from <code>/sequences/base36</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequenceInBase36() throws Exception {
-        final ResponseEntity<String> response = fetchString("/sequence/base36");
-        assertThat(response.getBody(), equalTo("1"));
+        final ResponseEntity<String> response = fetchString("/sequences/base36");
+        assertThat(response.getBody(), equalTo("2"));
     }
 
     /**
-     * Ensures that a sequence number in Base36 can be retrieved from <code>/sequence/base64</code>.
+     * Ensures that a sequence number in Base62 can be retrieved from <code>/sequences/base62</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
+    @Test
+    public void shouldGetSequenceInBase62() throws Exception {
+        final ResponseEntity<String> response = fetchString("/sequences/base62");
+        assertThat(response.getBody(), equalTo("d"));
+    }
+
+    /**
+     * Ensures that a sequence number in Base64 can be retrieved from <code>/sequences/base64</code>.
      *
      * @throws Exception
      *             In case something goes wrong.
      */
     @Test
     public void shouldGetSequenceInBase64() throws Exception {
-        final ResponseEntity<String> response = fetchString("/sequence/base64");
-        assertThat(response.getBody(), equalTo("Mg"));
+        final ResponseEntity<String> response = fetchString("/sequences/base64");
+        assertThat(response.getBody(), equalTo("NA"));
+    }
+
+    /**
+     * Ensures that a sequence number as HashId can be retrieved from <code>/sequences/hashid</code>.
+     *
+     * @throws Exception
+     *             In case something goes wrong.
+     */
+    @Test
+    public void shouldGetSequenceAsHashId() throws Exception {
+        final ResponseEntity<String> response = fetchString("/sequences/hashid");
+        assertThat(response.getBody(), equalTo("lQ"));
     }
 
 }

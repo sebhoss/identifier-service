@@ -34,6 +34,7 @@ import com.squareup.okhttp.Request;
 /**
  * OkHttp-based implementation
  */
+@SuppressWarnings("nls")
 class OkHttpIdentifierHttpClient implements IdentifierHttpClient {
 
     private final OkHttpClient httpClient;
@@ -55,32 +56,29 @@ class OkHttpIdentifierHttpClient implements IdentifierHttpClient {
 
     @Override
     public String getNextSequence() {
-        return get("sequence");
+        return get("sequences/sequence");
     }
 
     @Override
     public String getNextSequenceInBase36() {
-        return get("sequence/base36");
+        return get("sequences/base36");
+    }
+
+    @Override
+    public String getNextSequenceInBase62() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public String getNextSequenceInBase64() {
-        return get("sequence/base64");
+        return get("sequences/base64");
     }
 
     @Override
-    public String getNextUuid() {
-        return get("uuid");
-    }
-
-    @Override
-    public String getNextUuidInBase36() {
-        return get("uuid/base36");
-    }
-
-    @Override
-    public String getNextUuidInBase64() {
-        return get("uuid/base64");
+    public String getNextSequenceAsHashId() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -94,8 +92,47 @@ class OkHttpIdentifierHttpClient implements IdentifierHttpClient {
     }
 
     @Override
+    public String getNextTimestampInBase62() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public String getNextTimestampInBase64() {
         return get("timestamp/base64");
+    }
+
+    @Override
+    public String getNextTimestampAsHashId() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getNextUuid() {
+        return get("uuids/uuid");
+    }
+
+    @Override
+    public String getNextUuidInBase36() {
+        return get("uuid/base36");
+    }
+
+    @Override
+    public String getNextUuidInBase62() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getNextUuidInBase64() {
+        return get("uuid/base64");
+    }
+
+    @Override
+    public String getNextUuidAsHashId() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     private String get(final String path) {
