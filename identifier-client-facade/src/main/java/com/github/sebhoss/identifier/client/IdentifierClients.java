@@ -30,18 +30,18 @@ import com.squareup.okhttp.OkHttpClient;
 
 /**
  * Constructs new facades to use. In general, those are thread-safe, so there is no reason to construct multiple
- * facades, but it won't really hurt either (extra memory wasted).
+ * facades, but it won't really hurt either (except some extra memory wasted).
  */
-public final class IdentifierHttpClients {
+public final class IdentifierClients {
 
-    private IdentifierHttpClients() {
+    private IdentifierClients() {
         // factory class
     }
 
     /**
      * @return A new client facade using the default options
      */
-    public static IdentifierHttpClient http() {
+    public static IdentifierClient http() {
         return http("https://id.xn--ho-hia.de/"); //$NON-NLS-1$
     }
 
@@ -51,7 +51,7 @@ public final class IdentifierHttpClients {
      *            is required to end in a "/"
      * @return A new client facade which talks to the given baseUrl
      */
-    public static IdentifierHttpClient http(final String baseUrl) {
+    public static IdentifierClient http(final String baseUrl) {
         return http(new OkHttpClient(), baseUrl);
     }
 
@@ -63,8 +63,8 @@ public final class IdentifierHttpClients {
      *            is required to end in a "/"
      * @return A new client facade which talks to the given baseUrl using the given HTTP client
      */
-    public static IdentifierHttpClient http(final OkHttpClient client, final String baseUrl) {
-        return new OkHttpIdentifierHttpClient(client, baseUrl);
+    public static IdentifierClient http(final OkHttpClient client, final String baseUrl) {
+        return new OkHttpIdentifierClient(client, baseUrl);
     }
 
 }

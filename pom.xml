@@ -52,11 +52,9 @@
   <properties>
     <version.bom>2016.01.17</version.bom>
     <jacoco.lineCoverage>0.00000</jacoco.lineCoverage>
-    <pit.mutationCoverage>1</pit.mutationCoverage>
     <failBuildOnDuplicates>false</failBuildOnDuplicates>
     <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
     <failBuildOnDependencyProblem>false</failBuildOnDependencyProblem>
-    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <dependencyManagement>
@@ -81,14 +79,6 @@
           <skip>true</skip>
         </configuration>
        </plugin>
-
-       <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <configuration>
-         <skip>true</skip>
-        </configuration>
-      </plugin>
       </plugins>
     </pluginManagement>
   </build>

@@ -35,7 +35,7 @@ import com.squareup.okhttp.Request;
  * OkHttp-based implementation
  */
 @SuppressWarnings("nls")
-class OkHttpIdentifierHttpClient implements IdentifierHttpClient {
+class OkHttpIdentifierClient implements IdentifierClient {
 
     private final OkHttpClient httpClient;
     private final String       baseUrl;
@@ -49,7 +49,7 @@ class OkHttpIdentifierHttpClient implements IdentifierHttpClient {
      *            The base-URL for the ID server to use. Should look like this: `http://some-address.com/whatever/`.
      *            It's required that the URL contains a closing "/"
      */
-    OkHttpIdentifierHttpClient(final OkHttpClient httpClient, final String baseUrl) {
+    OkHttpIdentifierClient(final OkHttpClient httpClient, final String baseUrl) {
         this.httpClient = httpClient;
         this.baseUrl = baseUrl;
     }

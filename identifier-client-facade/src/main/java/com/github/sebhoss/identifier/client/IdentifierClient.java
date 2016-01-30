@@ -27,10 +27,11 @@
 package com.github.sebhoss.identifier.client;
 
 /**
- * Facade for the ID HTTP service. Can be used by clients who don't want to think about HTTP and/or where the remote is
- * located
+ * Client facade to interact with an ID service. Can be used by clients who don't want to think about HTTP and/or where
+ * the remote is located. An additional non-HTTP implementation is provided as well in order to allow clients to easily
+ * switch between locally and remotely generated IDs.
  */
-public interface IdentifierHttpClient {
+public interface IdentifierClient {
 
     /**
      * @return The next sequence number.

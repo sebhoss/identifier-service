@@ -58,7 +58,7 @@ public class UUIDsTest extends AbstractMockMvcTest<UUIDs, UUIDs.API> {
         supplier = api::nextUuid;
 
         // then
-        requestAndVerify("/uuid");
+        requestAndVerify("/uuids/uuid");
     }
 
     /**

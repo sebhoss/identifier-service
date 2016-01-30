@@ -47,9 +47,6 @@ public class Base62 {
      *             if <code>number</code> is a negative integer
      */
     public static String encode(final BigInteger number) {
-        if (number.compareTo(BigInteger.ZERO) == -1) { // number < 0
-            throw new IllegalArgumentException("number must not be negative"); //$NON-NLS-1$
-        }
         final StringBuilder result = new StringBuilder();
         BigInteger current = number;
         while (current.compareTo(BigInteger.ZERO) == 1) { // number > 0

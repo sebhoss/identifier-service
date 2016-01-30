@@ -82,6 +82,18 @@ public class SuppliedIdentifiersTest {
     }
 
     /**
+     * Ensures that the next sequence will be returned correctly in Base62.
+     */
+    @Test
+    public void shouldGetNextSequenceInBase62() {
+        given(longSupplier.getAsLong()).willReturn(valueOf(12345));
+
+        final String string = identifiers.nextSequenceInBase62();
+
+        Assert.assertEquals("dnh", string);
+    }
+
+    /**
      * Ensures that the next sequence will be returned correctly in Base64.
      */
     @Test
@@ -94,33 +106,15 @@ public class SuppliedIdentifiersTest {
     }
 
     /**
-     * Ensures that the next UUID will be returned correctly.
+     * Ensures that the next sequence will be returned correctly as HashId.
      */
     @Test
-    public void shouldGetNextUuid() {
-        final String string = identifiers.nextUuid();
+    public void shouldGetNextSequenceAsHashId() {
+        given(longSupplier.getAsLong()).willReturn(valueOf(12345));
 
-        Assert.assertNotNull(string);
-    }
+        final String string = identifiers.nextSequenceAsHashId();
 
-    /**
-     * Ensures that the next UUID will be returned correctly in Base36.
-     */
-    @Test
-    public void shouldGetNextUuidInBase36() {
-        final String string = identifiers.nextUuidInBase36();
-
-        Assert.assertNotNull(string);
-    }
-
-    /**
-     * Ensures that the next UUID will be returned correctly in Base64.
-     */
-    @Test
-    public void shouldGetNextUuidInBase64() {
-        final String string = identifiers.nextUuidInBase64();
-
-        Assert.assertNotNull(string);
+        Assert.assertEquals("j0gW", string);
     }
 
     /**
@@ -144,11 +138,81 @@ public class SuppliedIdentifiersTest {
     }
 
     /**
+     * Ensures that the next timestamp will be returned correctly in Base62.
+     */
+    @Test
+    public void shouldGetNextTimestampInBase62() {
+        final String string = identifiers.nextTimestampInBase62();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
      * Ensures that the next timestamp will be returned correctly in Base64.
      */
     @Test
     public void shouldGetNextTimestampInBase64() {
         final String string = identifiers.nextTimestampInBase64();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next timestamp will be returned correctly as HashId.
+     */
+    @Test
+    public void shouldGetNextTimestampAsHashId() {
+        final String string = identifiers.nextTimestampAsHashId();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next UUID will be returned correctly.
+     */
+    @Test
+    public void shouldGetNextUuid() {
+        final String string = identifiers.nextUuid();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next UUID will be returned correctly in Base36.
+     */
+    @Test
+    public void shouldGetNextUuidInBase36() {
+        final String string = identifiers.nextUuidInBase36();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next UUID will be returned correctly in Base62.
+     */
+    @Test
+    public void shouldGetNextUuidInBase62() {
+        final String string = identifiers.nextUuidInBase62();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next UUID will be returned correctly in Base64.
+     */
+    @Test
+    public void shouldGetNextUuidInBase64() {
+        final String string = identifiers.nextUuidInBase64();
+
+        Assert.assertNotNull(string);
+    }
+
+    /**
+     * Ensures that the next UUID will be returned correctly as HashId.
+     */
+    @Test
+    public void shouldGetNextUuidAsHashId() {
+        final String string = identifiers.nextUuidAsHashId();
 
         Assert.assertNotNull(string);
     }
