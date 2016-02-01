@@ -55,6 +55,7 @@
     <failBuildOnDuplicates>false</failBuildOnDuplicates>
     <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
     <failBuildOnDependencyProblem>false</failBuildOnDependencyProblem>
+    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <dependencyManagement>
@@ -79,6 +80,14 @@
           <skip>true</skip>
         </configuration>
        </plugin>
+
+       <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <configuration>
+         <skip>true</skip>
+        </configuration>
+      </plugin>
       </plugins>
     </pluginManagement>
   </build>
