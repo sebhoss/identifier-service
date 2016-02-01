@@ -2,6 +2,9 @@
 
 "use strict";
 
+// polyfill 'for .. of' loops for browsers that don't have that (yet) (like Chrome)
+NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
 const notice1 = '<div class="alert-box notice">';
 const notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
 const notice3 = '</div>';
