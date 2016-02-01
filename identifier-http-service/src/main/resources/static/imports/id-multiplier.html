@@ -29,8 +29,8 @@
                 decrement: function() {
                     if (this.value > 1) {
                         this.value--;
-                        var wrappers = document.querySelectorAll('.identifier-wrapper');
-                        for (var wrapper of wrappers) {
+                        let wrappers = document.querySelectorAll('.identifier-wrapper');
+                        for (let wrapper of wrappers) {
                             if (wrapper.hasChildNodes()) {
                                 wrapper.removeChild(wrapper.lastElementChild);
                             }
@@ -41,63 +41,48 @@
 
                 increment: function() {
                     this.value++;
-                    var url = window.location.href;
-                    var href = url.split("?")[0].split("#")[0];
-                    var notice1 = '<id-value path="';
-                    var notice2 = '"></id-value>';
-                    var notice = notice1 + href + notice2;
-                    var tmp = document.createElement('id-value');
+                    let url = window.location.href;
+                    let href = url.split("?")[0].split("#")[0];
+                    let notice1 = '<id-value path="';
+                    let notice2 = '"></id-value>';
+                    let notice = notice1 + href + notice2;
+                    let tmp = document.createElement('id-value');
                     tmp.innerHTML = notice;
 
-                    var wrappers = document.querySelectorAll('.identifier-wrapper');
-                    for (var wrapper of wrappers) {
+                    let wrappers = document.querySelectorAll('.identifier-wrapper');
+                    for (let wrapper of wrappers) {
                         wrapper.appendChild(tmp);
                     }
                     this.adaptIdentifierNumber();
                 },
 
-                adaptIdentifierNumber: function() {
-                    var url = window.location.href;
-                    var newAdditionalURL = "";
-                    var tempArray = url.split("?");
-                    var baseURL = tempArray[0].split("#")[0];
-                    var aditionalURL = tempArray[1]; 
-                    var temp = "";
+                updateUrl: function() {
+                    let url = window.location.href;
+                    let newAdditionalURL = "";
+                    let tempArray = url.split("?");
+                    let baseURL = tempArray[0].split("#")[0];
+                    let aditionalURL = tempArray[1]; 
+                    let temp = "";
                     if (aditionalURL) {
-                        var parameters = aditionalURL.split("#")[0];
-                        var tempArray = parameters.split("&");
-                        for (var i in tempArray) {
+                        let parameters = aditionalURL.split("#")[0];
+                        let tempArray = parameters.split("&");
+                        for (let i in tempArray) {
                             if (tempArray[i].indexOf("quantity") == -1) {
                                 newAdditionalURL += temp + tempArray[i];
                                 temp = "&";
                             }
                         }
                     }
-                    var params = temp + "quantity=" + this.value + "#identifiers";
-                    var finalURL = baseURL + "?" + newAdditionalURL + params;
-                    window.history.pushState({"quantity": this.value}, "ID Service", finalURL);
+                    let params = temp + "quantity=" + this.value + "#identifiers";
+                    return baseURL + "?" + newAdditionalURL + params;
+                },
+
+                adaptIdentifierNumber: function() {
+                    window.history.pushState({"quantity": this.value}, "ID Service", this.updateUrl());
                 },
 
                 redirectWithNewQuantity: function() {
-                    var url = window.location.href;
-                    var newAdditionalURL = "";
-                    var tempArray = url.split("?");
-                    var baseURL = tempArray[0].split("#")[0];
-                    var aditionalURL = tempArray[1]; 
-                    var temp = "";
-                    if (aditionalURL) {
-                        var parameters = aditionalURL.split("#")[0];
-                        var tempArray = parameters.split("&");
-                        for (var i in tempArray) {
-                            if (tempArray[i].indexOf("quantity") == -1) {
-                                newAdditionalURL += temp + tempArray[i];
-                                temp = "&";
-                            }
-                        }
-                    }
-                    var params = temp + "quantity=" + this.value + "#identifiers";
-                    var finalURL = baseURL + "?" + newAdditionalURL + params;
-                    window.location.href = finalURL;
+                    window.location.href = this.updateUrl();
                 }
 
               });

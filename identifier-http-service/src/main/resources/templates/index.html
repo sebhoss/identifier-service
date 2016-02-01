@@ -43,7 +43,6 @@
         <link rel="import" href="/imports/id-value.html"></link>
         <link rel="import" href="/imports/id-multiplier.html"></link>
         <script src="/js/clipboard.js" type="application/javascript"></script>
-        <script src="/js/clipboard.js" type="application/javascript;version=1.7"></script>
     </head>
     <body>
         <div id="alerts">
@@ -368,6 +367,97 @@
                 <div th:if="${uuidHashId}">
                     <p>Display a <a th:href="@{/uuids/hashid#javaclient}">new new UUID</a> in <strong>HashId</strong> with: </p>
                     <pre class="clipboard">final String identifier = client.getNextUuidAsHashId();</pre>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="slack"><a href="/#slack">Slack</a></h1>
+        <div class="apis">
+            <div th:if="${sequences}" class="api">
+                <h2><a th:href="@{/sequences#slack}">Sequences</a></h2>
+
+                <div>
+                    <p>Create a new <a href="https://api.slack.com/slash-commands">custom command</a> for your team in <a href="https://slack.com">Slack</a>. Point it to:</p>
+                    <pre class="clipboard" th:text="${HOST} + '/slack'"></pre>
+                </div>
+
+                <div th:if="${sequence}">
+                    <p>Display a <a th:href="@{/sequences/sequence#javaclient}">new sequence</a> with the following command name: </p>
+                    <pre class="clipboard">/sequence [number of sequences]</pre>
+                </div>
+                <div th:if="${sequence36}">
+                    <p>Display a <a th:href="@{/sequences/base36#javaclient}">new sequence</a> in <strong>Base36</strong> with the following command name: </p>
+                    <pre class="clipboard">/sequence-in-base36 [number of sequences]</pre>
+                </div>
+                <div th:if="${sequence62}">
+                    <p>Display a <a th:href="@{/sequences/base62#javaclient}">new sequence</a> in <strong>Base62</strong> with the following command name: </p>
+                    <pre class="clipboard">/sequence-in-base62 [number of sequences]</pre>
+                </div>
+                <div th:if="${sequence64}">
+                    <p>Display a <a th:href="@{/sequences/base64#javaclient}">new sequence</a> in <strong>Base64</strong> with the following command name: </p>
+                    <pre class="clipboard">/sequence-in-base64 [number of sequences]</pre>
+                </div>
+                <div th:if="${sequenceHashId}">
+                    <p>Display a <a th:href="@{/sequences/hashid#javaclient}">new sequence</a> in <strong>HashId</strong> with the following command name: </p>
+                    <pre class="clipboard">/sequence-as-hashid [number of sequences]</pre>
+                </div>
+            </div>
+            <div th:if="${timestamps}" class="api">
+                <h2><a th:href="@{/timestamps#slack}">Timestamps</a></h2>
+
+                <div>
+                    <p>Create a new <a href="https://api.slack.com/slash-commands">custom command</a> for your team in <a href="https://slack.com">Slack</a>. Point it to:</p>
+                    <pre class="clipboard" th:text="${HOST} + '/slack'"></pre>
+                </div>
+
+                <div th:if="${timestamp}">
+                    <p>Display a <a th:href="@{/timestamps/timestamp#javaclient}">new timestamp</a> with the following command name: </p>
+                    <pre class="clipboard">/timestamp [number of timestamps]</pre>
+                </div>
+                <div th:if="${timestamp36}">
+                    <p>Display a <a th:href="@{/timestamps/base36#javaclient}">new timestamp</a> in <strong>Base36</strong> with the following command name: </p>
+                    <pre class="clipboard">/timestamp-in-base36 [number of timestamps]</pre>
+                </div>
+                <div th:if="${timestamp62}">
+                    <p>Display a <a th:href="@{/timestamps/base62#javaclient}">new timestamp</a> in <strong>Base62</strong> with the following command name: </p>
+                    <pre class="clipboard">/timestamp-in-base62 [number of timestamps]</pre>
+                </div>
+                <div th:if="${timestamp64}">
+                    <p>Display a <a th:href="@{/timestamps/base64#javaclient}">new timestamp</a> in <strong>Base64</strong> with the following command name: </p>
+                    <pre class="clipboard">/timestamp-in-base64 [number of timestamps]</pre>
+                </div>
+                <div th:if="${timestampHashId}">
+                    <p>Display a <a th:href="@{/timestamps/hashid#javaclient}">new timestamp</a> in <strong>HashId</strong> with the following command name: </p>
+                    <pre class="clipboard">/timestamp-as-hashid [number of timestamps]</pre>
+                </div>
+            </div>
+            <div th:if="${uuids}" class="api">
+                <h2><a th:href="@{/uuids#slack}">UUIDs</a></h2>
+
+                <div>
+                    <p>Create a new <a href="https://api.slack.com/slash-commands">custom command</a> for your team in <a href="https://slack.com">Slack</a>. Point it to:</p>
+                    <pre class="clipboard" th:text="${HOST} + '/slack'"></pre>
+                </div>
+
+                <div th:if="${uuid}">
+                    <p>Display a <a th:href="@{/uuids/uuid#javaclient}">new UUID</a> with the following command name: </p>
+                    <pre class="clipboard">/uuid [number of uuids]</pre>
+                </div>
+                <div th:if="${uuid36}">
+                    <p>Display a <a th:href="@{/uuids/base36#javaclient}">new UUID</a> in <strong>Base36</strong> with the following command name: </p>
+                    <pre class="clipboard">/uuid-in-base36 [number of uuids]</pre>
+                </div>
+                <div th:if="${uuid62}">
+                    <p>Display a <a th:href="@{/uuids/base62#javaclient}">new UUID</a> in <strong>Base62</strong> with the following command name: </p>
+                    <pre class="clipboard">/uuid-in-base62 [number of uuids]</pre>
+                </div>
+                <div th:if="${uuid64}">
+                    <p>Display a <a th:href="@{/uuids/base64#javaclient}">new UUID</a> in <strong>Base64</strong> with the following command name: </p>
+                    <pre class="clipboard">/uuid-in-base64 [number of uuids]</pre>
+                </div>
+                <div th:if="${uuidHashId}">
+                    <p>Display a <a th:href="@{/uuids/hashid#javaclient}">new UUID</a> in <strong>HashId</strong> with the following command name: </p>
+                    <pre class="clipboard">/uuid-as-hashid [number of uuids]</pre>
                 </div>
             </div>
         </div>

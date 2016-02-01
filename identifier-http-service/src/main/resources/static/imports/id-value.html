@@ -56,13 +56,13 @@
                 },
 
                 copyToClipboard: function() {
-                    var value = this.$.id.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-                    var alert = document.querySelector('#alert-container');
-                    var notice1 = '<div class="alert-box notice">';
-                    var notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
-                    var notice3 = '</div>';
-                    var notice = notice1 + notice2 + '<span>' + this.value + '</span>' + notice3;
-                    var tmp = document.createElement('div');
+                    let value = this.$.id.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                    let alert = document.querySelector('#alert-container');
+                    let notice1 = '<div class="alert-box notice">';
+                    let notice2 = '<span class="alert-type">notice: </span>Clipboard now contains: ';
+                    let notice3 = '</div>';
+                    let notice = notice1 + notice2 + '<span>' + this.value + '</span>' + notice3;
+                    let tmp = document.createElement('div');
                     tmp.innerHTML = notice;
 
                     clipboard(this.$.id.textContent);
@@ -75,7 +75,7 @@
                 },
 
                 refresh: function() {
-                    var httpRequest = new XMLHttpRequest();
+                    let httpRequest = new XMLHttpRequest();
 
                     if (!httpRequest) {
                         return false;

@@ -52,6 +52,9 @@ public class SlackCommands {
     @RequestMapping(path = HttpApi.SLACK)
     public String customCommands(final SlackCommand command) {
         try {
+            if (command.getText() == null || command.getText().isEmpty()) {
+                return Multiplier.multiple(1, suppliers.get(command.getCommand()));
+            }
             final int quantity = Integer.parseInt(command.getText());
             return Multiplier.multiple(quantity, suppliers.get(command.getCommand()));
         } catch (final NumberFormatException exception) {
