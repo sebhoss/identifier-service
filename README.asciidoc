@@ -1,3 +1,7 @@
+= Identifier-Service
+
+image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
+image:https://img.shields.io/gitter/room/sebhoss/identifier-service.svg?style=flat-square["join chat", link="https://gitter.im/sebhoss/identifier-service"]
 
 
 - demo at https://guarded-dawn-41655.herokuapp.com/
