@@ -404,7 +404,7 @@ public class IndexPages {
     @SafeVarargs
     private static String index(final Model model, final Integer quantity, final Consumer<Model>... consumers) {
         Arrays.stream(consumers).forEach(consumer -> consumer.accept(model));
-        model.addAttribute("quantity", quantity == null ? Integer.valueOf(1) : quantity);
+        model.addAttribute("quantity", quantity);
         return "index"; // delegates to the 'index' template
     }
 
