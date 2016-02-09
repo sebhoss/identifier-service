@@ -24,10 +24,7 @@
 #
 # For more information, please refer to <http://unlicense.org>
 #
-###############################################################################
-#
-# Application configuration
-#
+
 application:
   url: http://localhost:8080
 

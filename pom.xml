@@ -55,7 +55,6 @@
     <failBuildOnDuplicates>false</failBuildOnDuplicates>
     <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
     <failBuildOnDependencyProblem>false</failBuildOnDependencyProblem>
-    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <dependencyManagement>
@@ -73,14 +72,6 @@
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-       </plugin>
-
        <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
