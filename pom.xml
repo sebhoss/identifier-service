@@ -50,7 +50,7 @@
   </modules>
 
   <properties>
-    <version.bom>2016.01.17</version.bom>
+    <version.bom>2016.02.07</version.bom>
     <jacoco.lineCoverage>0.00000</jacoco.lineCoverage>
     <failBuildOnDuplicates>false</failBuildOnDuplicates>
     <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
