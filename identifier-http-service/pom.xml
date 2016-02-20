@@ -203,16 +203,16 @@
             </plugin>
 
             <plugin>
-	            <groupId>com.heroku.sdk</groupId>
-	            <artifactId>heroku-maven-plugin</artifactId>
-	            <version>0.5.7</version>
-	            <configuration>
-  					<appName>guarded-dawn-41655</appName>
-  					<processTypes>
-  						<web>java -Dserver.port=$PORT -Dapplication.url=https://guarded-dawn-41655.herokuapp.com -jar target/${project.build.finalName}.jar</web>
-  					</processTypes>
-				</configuration>
-	        </plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.5.7</version>
+                <configuration>
+                    <appName>guarded-dawn-41655</appName>
+                    <processTypes>
+                        <web>java -Dserver.port=$PORT -Dapplication.url=https://guarded-dawn-41655.herokuapp.com -jar target/${project.build.finalName}.jar</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
