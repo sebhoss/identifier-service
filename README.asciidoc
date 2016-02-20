@@ -33,7 +33,7 @@ Service to generate more or less unique identifiers.
 | master
 | no
 
-| https://guarded-dawn-41655.herokuapp.com/
+| https://identifier-service.herokuapp.com/
 | Heroku
 | US
 | master
