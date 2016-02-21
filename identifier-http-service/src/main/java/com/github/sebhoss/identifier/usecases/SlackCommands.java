@@ -96,8 +96,8 @@ public class SlackCommands {
     private String message(final String identifiers, final String command, final int quantity) {
         final String messagePrefix = properties.getSlack().getMessagePrefix();
         if (messagePrefix != null && !messagePrefix.isEmpty()) {
-            return String.format(messagePrefix, Integer.valueOf(quantity), command.replace("/", "")) + "\n"
-                    + identifiers;
+            return String.format(messagePrefix, properties.getUrl(), command.replace("/", ""),
+                    Integer.valueOf(quantity)) + "\n" + identifiers;
         }
         return identifiers;
     }

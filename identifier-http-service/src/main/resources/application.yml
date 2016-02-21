@@ -8,7 +8,10 @@
 application:
   url: http://localhost:8080
   slack:
-    message-prefix: '`%1$s` of `%2$s`:'
+    # %1$s: application URL
+    # %2$s: command name
+    # %3$s: quantity
+    message-prefix: '`%3$s` of `%2$s` from %1$s:'
 
 
 ###############################################################################
