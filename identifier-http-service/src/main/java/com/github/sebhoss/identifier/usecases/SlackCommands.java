@@ -6,18 +6,21 @@
  */
 package com.github.sebhoss.identifier.usecases;
 
+import static com.github.sebhoss.identifier.usecases.HttpApi.SLACK;
+import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Supplier;
+
 import com.codahale.metrics.annotation.Timed;
+import com.github.sebhoss.identifier.application.ApplicationProperties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
-import static com.github.sebhoss.identifier.usecases.HttpApi.SLACK;
-import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
 
 /**
  * Slack slash commands can be answered.
@@ -28,10 +31,12 @@ import static com.github.sebhoss.identifier.usecases.Multiplier.multiple;
 @SuppressWarnings("nls")
 public class SlackCommands {
 
+    private final ApplicationProperties         properties;
     private final Map<String, Supplier<String>> suppliers;
 
     @Autowired
-    SlackCommands(final API api) {
+    SlackCommands(final ApplicationProperties properties, final API api) {
+        this.properties = properties;
         suppliers = new HashMap<>();
         suppliers.put("/sequence", api::nextSequence);
         suppliers.put("/sequence-in-base36", api::nextSequenceInBase36);
@@ -53,29 +58,48 @@ public class SlackCommands {
     /**
      * Shows the root page which contains all possible identifiers.
      *
-     * @param command
+     * @param slashCommand
      *            The command to execute/respond-to.
      * @return The view name for the index page.
      */
     @Timed
     @ResponseBody
     @RequestMapping(SLACK)
-    public String slashCommands(final SlackCommand command) {
+    public String slashCommands(final SlackCommand slashCommand) {
         try {
-            final int quantity = getQuantity(command);
-            final Supplier<String> supplier = suppliers.get(command.getCommand());
+            final String command = slashCommand.getCommand();
+            final String text = slashCommand.getText();
+            final Supplier<String> supplier = extractSupplier(command);
+            final int quantity = extractQuantity(text);
+            final String identifiers = multiple(quantity, supplier);
 
-            return multiple(quantity, supplier);
+            return message(identifiers, command, quantity);
         } catch (final NumberFormatException exception) {
-            return "That's not a number " + command.getUser_name() + "!";
+            return "That's not a (parsable) number " + slashCommand.getUser_name() + "!";
+        } catch (final IllegalArgumentException exception) {
+            return "That's an unknown command " + slashCommand.getUser_name() + "!";
         }
     }
 
-    private static int getQuantity(final SlackCommand command) {
-        if (command.getText() == null || command.getText().isEmpty()) {
+    private Supplier<String> extractSupplier(final String command) {
+        return Optional.of(suppliers.get(command))
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private static int extractQuantity(final String text) {
+        if (text == null || text.isEmpty()) {
             return 1;
         }
-        return Integer.parseInt(command.getText());
+        return Math.max(1, Integer.parseInt(text));
+    }
+
+    private String message(final String identifiers, final String command, final int quantity) {
+        final String messagePrefix = properties.getSlack().getMessagePrefix();
+        if (messagePrefix != null && !messagePrefix.isEmpty()) {
+            return String.format(messagePrefix, Integer.valueOf(quantity), command.replace("/", "")) + "\n"
+                    + identifiers;
+        }
+        return identifiers;
     }
 
     static final class SlackCommand {

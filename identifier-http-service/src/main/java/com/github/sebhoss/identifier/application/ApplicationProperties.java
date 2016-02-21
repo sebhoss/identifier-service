@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class ApplicationProperties {
 
     private String url;
+    private Slack  slack;
 
     /**
      * @return the url
@@ -31,6 +32,45 @@ public class ApplicationProperties {
      */
     public void setUrl(final String url) {
         this.url = url;
+    }
+
+    /**
+     * @return the slack
+     */
+    public Slack getSlack() {
+        return slack;
+    }
+
+    /**
+     * @param slack
+     *            the slack to set
+     */
+    public void setSlack(final Slack slack) {
+        this.slack = slack;
+    }
+
+    /**
+     *
+     */
+    public static class Slack {
+
+        private String messagePrefix;
+
+        /**
+         * @return the messagePrefix
+         */
+        public String getMessagePrefix() {
+            return messagePrefix;
+        }
+
+        /**
+         * @param messagePrefix
+         *            the messagePrefix to set
+         */
+        public void setMessagePrefix(final String messagePrefix) {
+            this.messagePrefix = messagePrefix;
+        }
+
     }
 
 }
