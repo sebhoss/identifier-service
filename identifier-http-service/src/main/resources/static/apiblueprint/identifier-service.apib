@@ -1,0 +1,47 @@
+FORMAT: 1A
+
+# identifier-service
+
+identifier-service offers a simple API allowing consumers to retrieve (unique) identifiers.
+
+# Group UUID 
+
+## UUID [/uuids/uuid/{quantity}]
+
+### Generate new UUIDs [GET]
++ Response 200 (text/plain)
++ Parameters
+  + quantity: `20` (number, optional) - how many UUIDs should be generated?
+    + Default: `5`
+
+## UUID Base36 [/uuids/base36/{quantity}]
+
+### Generate new UUIDs using Base36 encoding [GET]
++ Response 200 (text/plain)
++ Parameters
+  + quantity: `20` (number, optional) - how many UUIDs should be generated?
+    + Default: `5`
+
+## UUID Base62 [/uuids/base62/{quantity}]
+
+### Generate new UUIDs using Base62 encoding [GET]
++ Response 200 (text/plain)
++ Parameters
+  + quantity: `20` (number, optional) - how many UUIDs should be generated?
+    + Default: `5`
+
+## UUID Base64 [/uuids/base64/{quantity}]
+
+### Generate new UUIDs using Base64 encoding [GET]
++ Response 200 (text/plain)
++ Parameters
+  + quantity: `20` (number, optional) - how many UUIDs should be generated?
+    + Default: `5`
+
+## UUID HashId [/uuids/hashid/{quantity}]
+
+### Generate new UUIDs encoded as HashId [GET]
++ Response 200 (text/plain)
++ Parameters
+  + quantity: `20` (number, optional) - how many UUIDs should be generated?
+    + Default: `5`
