@@ -14,9 +14,9 @@
   <!--                                 PARENT                                  -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <parent>
-    <groupId>com.github.sebhoss</groupId>
-    <artifactId>java-parent</artifactId>
-    <version>2.0.2</version>
+    <groupId>de.xn--ho-hia.maven.parents</groupId>
+    <artifactId>maven-parents-java-prototype</artifactId>
+    <version>2017.03.19-175909</version>
   </parent>
 
   <groupId>com.github.sebhoss.identifier</groupId>
@@ -29,40 +29,5 @@
     <module>identifier-http-service</module>
     <module>identifier-client-facade</module>
   </modules>
-
-  <properties>
-    <version.bom>2016.02.07</version.bom>
-    <jacoco.lineCoverage>0.00000</jacoco.lineCoverage>
-    <failBuildOnDuplicates>false</failBuildOnDuplicates>
-    <failBuildOnDependencyVersionProblem>false</failBuildOnDependencyVersionProblem>
-    <failBuildOnDependencyProblem>false</failBuildOnDependencyProblem>
-    <license.skip>true</license.skip>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.github.sebhoss.bom</groupId>
-        <artifactId>auto-managed</artifactId>
-        <version>${version.bom}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-       <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <configuration>
-         <skip>true</skip>
-        </configuration>
-      </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 
 </project>

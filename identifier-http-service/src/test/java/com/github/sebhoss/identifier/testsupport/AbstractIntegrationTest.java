@@ -6,6 +6,8 @@
  */
 package com.github.sebhoss.identifier.testsupport;
 
+import com.github.sebhoss.identifier.IdentifierApplication;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,18 +17,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Abstract integration test that sets up a Spring context of the entire
- * application + ways to access the identifier service.
+ * Abstract integration test that sets up a Spring context of the entire application + ways to access the identifier
+ * service.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = IdentifierApplication.class)
 public abstract class AbstractIntegrationTest {
 
-  @Autowired
-  protected TestRestTemplate template;
+    @Autowired
+    protected TestRestTemplate template;
 
-  protected final ResponseEntity<String> fetchString(final String path) {
-    return template.getForEntity(path, String.class);
-  }
+    protected final ResponseEntity<String> fetchString(final String path) {
+        return template.getForEntity(path, String.class);
+    }
 
 }
