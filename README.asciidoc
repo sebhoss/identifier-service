@@ -7,7 +7,9 @@ Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
 :toc-placement: preamble
 
 image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
+image:https://reposs.herokuapp.com/?path={github-org}/{project-name}&style=flat-square["Repository size"]
 image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/{project-name}"]
+
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
 
 Service to generate more or less unique identifiers.
