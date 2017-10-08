@@ -13,7 +13,8 @@ cache:
 
 # see http://docs.travis-ci.com/user/notifications/
 notifications:
-  # see https://docs.travis-ci.com/user/notifications/#email-notifications
-  email: false
-  slack:
-    secure: MOYGq4zdCZWxJs8L1sIMqMVGLrdild5c05S4fZu7k1WDPGG6wvzCN0/cmZcnTAFBzz1bJ8AvLmq4XBWjacODGV5nw+Ab1ASO2Q4rP3HNpSFC7t/i46/TpPmqJcEdZPSFHnKtIHwvynqoM1ZICZB/7DB+ZMmD2Wf6m592csg5lYFVQoOI7PeH4iarOQ3DoGoG/Yfent9qEPoIPorskPmbVC2MyD0fVf92/0cAFzPgDmzsFri+dNg+SSbfM6I8uVmmvHDeLobYtIJNZF2kn1RnFwfo1nZHyycg7JowURgRKJFvlqOmh3KNfmBRAByiAKIXRA8NsgydBHxvdGM4oK6DCygBz7HHGrPr7J82Hbrj+7aajKRpKW6VuFTdodn5hEGeVJ80GHF7IqjSzr6HC9acSmuTNQOTg8x6t+etnpJs49XCN1JmZYGSjqVfmF0V0yTiImMWBXj0u0DrgIogTTl91pKJf35kk1IJe9SDN9mWllcyEpUfUWrDgnF2N4uNiXnbdOe1ZIAHztt+ACHFRISOm6jIFT1FhOpIjof9AUycQEKegkNC9jX3kHMGfH11nHKF27w2aZ70n1hkz1yFEQHLxaTpgk5+HKBBbi88gPX7RVdMCINpFjm1/PNESPplT6iUMMC4kzMgSU2iySDEwozvA4QAO3+05BJDmuvlKF37kN8=
+  # see https://docs.travis-ci.com/user/notifications/#Email-notifications
+  email:
+    - "metio@googlegroups.com"
+  # see https://docs.travis-ci.com/user/notifications/#IRC-notification
+  irc: "chat.freenode.net#metio.wtf"
