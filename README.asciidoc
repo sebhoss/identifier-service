@@ -27,23 +27,11 @@ Service to generate more or less unique identifiers.
 |===
 | Host | Provider | Region | Branch | Sleepy?
 
-| https://id-sebhoss.rhcloud.com/
-| OpenShift
-| US/East
+| https://id.metio.wtf/
+| Hetzner
+| Europe/Central
 | master
 | no
-
-| https://identifier-service.herokuapp.com/
-| Heroku
-| US
-| master
-| yes
-
-| https://identifier-service.azurewebsites.net/
-| Azure
-| Europe/West
-| master
-| yes
 |===
 
 == Development Status

@@ -15,3 +15,4 @@ documentation:
  - curl bugs:
    * https://curl.haxx.se/docs/todo.html#Support_IDNA2008
  - https://codebeat.co/projects/github-com-sebhoss-identifier-service/
+ - https://apiblueprint.org/

@@ -6,47 +6,27 @@
  */
 package com.github.sebhoss.identifier.testsupport;
 
-import com.github.sebhoss.identifier.IdentifierApplication;
-
-import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Abstract integration test that sets up a Spring context of the entire application + ways to access the identifier
- * service.
+ * Abstract integration test that sets up a Spring context of the entire
+ * application + ways to access the identifier service.
  */
-@WebIntegrationTest(randomPort = true)
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = IdentifierApplication.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
-    @Value("${local.server.port}")
-    private int            port;
+  @Autowired
+  protected TestRestTemplate template;
 
-    protected String       base;
-    protected RestTemplate template;
-
-    /**
-     * set up the base URL of the service + the RestTemplate to connect to it.
-     *
-     * @throws Exception
-     *             In case something goes wrong
-     */
-    @Before
-    public void setUp() throws Exception {
-        base = "http://localhost:" + port; //$NON-NLS-1$
-        template = new TestRestTemplate();
-    }
-
-    protected final ResponseEntity<String> fetchString(final String path) {
-        return template.getForEntity(base + path, String.class);
-    }
+  protected final ResponseEntity<String> fetchString(final String path) {
+    return template.getForEntity(path, String.class);
+  }
 
 }
