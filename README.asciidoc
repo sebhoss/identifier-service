@@ -1,4 +1,4 @@
-= Identifier-Service
+= Identifier-Service image:https://img.shields.io/badge/email-%40metio-brightgreen.svg?style=social&label=mail["Discuss on Google Groups", link="https://groups.google.com/forum/#!forum/metio"] image:https://img.shields.io/badge/irc-%23metio.wtf-brightgreen.svg?style=social&label=IRC["Chat on IRC", link="http://webchat.freenode.net/?channels=metio.wtf"]
 Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
 :github-org: sebhoss
 :project-name: identifier-service
@@ -9,7 +9,6 @@ Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
 image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
 image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/{project-name}"]
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
-image:https://img.shields.io/gitter/room/{github-org}/{project-name}.svg?style=flat-square["join chat", link="https://gitter.im/{github-org}/{project-name}"]
 
 Service to generate more or less unique identifiers.
 
